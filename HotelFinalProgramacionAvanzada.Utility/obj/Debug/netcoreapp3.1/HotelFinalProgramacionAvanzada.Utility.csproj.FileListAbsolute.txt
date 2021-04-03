@@ -1,0 +1,9 @@
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.deps.json
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.csprojAssemblyReference.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.AssemblyInfoInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.AssemblyInfo.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.csproj.CoreCompileInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.pdb

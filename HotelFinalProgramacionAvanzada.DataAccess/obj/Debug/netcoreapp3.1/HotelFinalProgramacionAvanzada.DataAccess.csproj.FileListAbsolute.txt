@@ -1,0 +1,17 @@
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.deps.json
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.csprojAssemblyReference.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.AssemblyInfoInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.AssemblyInfo.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.runtimeconfig.json
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.runtimeconfig.dev.json
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Models.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Models.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.Utility.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.csproj.CopyComplete
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\netcoreapp3.1\HotelFinalProgramacionAvanzada.DataAccess.genruntimeconfig.cache
