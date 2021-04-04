@@ -1,0 +1,12 @@
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.deps.json
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\bin\Debug\net5.0\ref\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.csprojAssemblyReference.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.AssemblyInfoInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.AssemblyInfo.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.csproj.CoreCompileInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\ref\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.Utility\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.pdb

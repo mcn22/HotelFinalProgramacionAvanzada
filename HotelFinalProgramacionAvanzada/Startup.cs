@@ -1,8 +1,12 @@
 using HotelFinalProgramacionAvanzada.DataAccess.Data;
+using HotelFinalProgramacionAvanzada.DataAccess.Repositorio;
+using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
+using HotelFinalProgramacionAvanzada.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,17 +31,39 @@ namespace HotelFinalProgramacionAvanzada
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>
-               (
-                   options =>
-                       options.UseSqlServer
-                           (Configuration.GetConnectionString("DefaultConnection"))
-               );
+                (
+                    options =>
+                        options.UseSqlServer
+                            (Configuration.GetConnectionString("DefaultConnection"))
+                );
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddScoped<IUnidadTrabajo, UnidadTrabajo>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.ConfigureApplicationCookie
+              (
+                options =>
+                {
+                    options.LoginPath = "/Identity/Account/Login";
+                    options.LogoutPath = "/Identity/Account/Logout";
+                    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                }
+              );
+
+            //services.AddAuthentication().AddFacebook
+            //  (
+            //    options =>
+            //    {
+            //        options.AppId = "1575719865965523";
+            //        options.AppSecret = "dbbb14762e78bf8834b79634b259f892";
+            //    }
+            //  );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +72,7 @@ namespace HotelFinalProgramacionAvanzada
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -58,6 +85,7 @@ namespace HotelFinalProgramacionAvanzada
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -65,6 +93,7 @@ namespace HotelFinalProgramacionAvanzada
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
