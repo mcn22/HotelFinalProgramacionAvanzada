@@ -1,0 +1,50 @@
+﻿@model HotelFinalProgramacionAvanzada.Models.TipoHabitacion
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Upsert" asp-route-id="@Model.TipoHabitacionId" onsubmit="return PostForm(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TipoHabitacionId" />
+            <div class="form-group row m-1">
+                <label asp-for="Nombre" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="Nombre" class="form-control" />
+                </div>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group row m-1">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="Descripcion" class="form-control" />
+                </div>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group row m-1">
+                <label asp-for="CostoNoche" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="CostoNoche" class="form-control" />
+                </div>
+                <span asp-validation-for="CostoNoche" class="text-danger"></span>
+            </div>
+            <div class="form-group row m-1">
+                <label asp-for="ImagenTipo" class="control-label"></label>
+                <div class="input-group">
+                    <input asp-for="ImagenTipo" class="form-control" />
+                </div>
+                <span asp-validation-for="ImagenTipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

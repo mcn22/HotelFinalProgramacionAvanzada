@@ -1,0 +1,24 @@
+﻿@model IEnumerable<HotelFinalProgramacionAvanzada.Models.TipoHabitacion>
+
+@{ ViewData["Title"] = "Listado de Tipos Habitacion"; }
+
+<h2 class="text-center">Listado de tipos de habitacion</h2>
+
+<table class="table" id="tblTiposHabitacion">
+    <thead class="thead-light">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Costo por noche</th>
+            <th>
+                <a onclick="ShowPopup('@Url.Action("Upsert", "TipoHabitacion", null, Context.Request.Scheme)','Nuevo Tipo de habitacion')" class="btn btn-success text-white"><i class="fas fa-random"></i> Nuevo Tipo de habitacion</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/tipohabitacion.js"></script>
+}

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HotelFinalProgramacionAvanzada.Controllers
 {
-    public class HotelController : Controller
+    public class TipoHabitacionController : Controller
     {
-        public HotelController(IUnidadTrabajo unidadTrabajo)
+        public TipoHabitacionController(IUnidadTrabajo unidadTrabajo)
         {
             _unidadTrabajo = unidadTrabajo;
         }
@@ -27,10 +27,10 @@ namespace HotelFinalProgramacionAvanzada.Controllers
         public IActionResult Upsert(int id = 0)
         {
             if (id == 0)
-                return View(new Hotel());
+                return View(new TipoHabitacion());
             else
             {
-                var t = _unidadTrabajo.Hoteles.Buscar(id);
+                var t = _unidadTrabajo.TiposHabitacion.Buscar(id);
                 if (t == null)
                 {
                     return NotFound();
@@ -41,25 +41,25 @@ namespace HotelFinalProgramacionAvanzada.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(int id, Hotel Hotel)
+        public IActionResult Upsert(int id, TipoHabitacion tipoHabitacion)
         {
             if (ModelState.IsValid)
             {
                 if (id == 0)
                 {
-                    _unidadTrabajo.Hoteles.Agregar(Hotel);
+                    _unidadTrabajo.TiposHabitacion.Agregar(tipoHabitacion);
                     _unidadTrabajo.Guardar();
                 }
                 else
                 {
                     try
                     {
-                        _unidadTrabajo.Hoteles.Actualizar(Hotel);
+                        _unidadTrabajo.TiposHabitacion.Actualizar(tipoHabitacion);
                         _unidadTrabajo.Guardar();
                     }
                     catch (DbUpdateConcurrencyException)
                     {
-                        if (_unidadTrabajo.Hoteles.Buscar(Hotel.HotelId) == null)
+                        if (_unidadTrabajo.TiposHabitacion.Buscar(tipoHabitacion.TipoHabitacionId) == null)
                         {
                             return NotFound();
                         }
@@ -69,28 +69,28 @@ namespace HotelFinalProgramacionAvanzada.Controllers
                         }
                     }
                 }
-                return Json(new { success = true, message = "El Hotel ha sido guardado." });
+                return Json(new { success = true, message = "El tipo de habitacion  ha sido guardado." });
             }
-            return Json(new { success = false, message = "Ocurrió un error guardando el Hotel." });
+            return Json(new { success = false, message = "Ocurrió un error guardando el tipo de habitacion ." });
         }
 
         [HttpGet]
         public IActionResult Listar()
         {
-            return Json(new { success = true, data = _unidadTrabajo.Hoteles.Listar() });
+            return Json(new { success = true, data = _unidadTrabajo.TiposHabitacion.Listar()});
         }
 
         [HttpDelete]
         public IActionResult Borrar(int id)
         {
-            var t = _unidadTrabajo.Hoteles.Buscar(id);
+            var t = _unidadTrabajo.TiposHabitacion.Buscar(id);
             if (t == null)
             {
-                return Json(new { success = false, message = "Hotel no borrado." });
+                return Json(new { success = false, message = "Tipo de habitacion  no borrado." });
             }
-            _unidadTrabajo.Hoteles.Remover(t);
+            _unidadTrabajo.TiposHabitacion.Remover(t);
             _unidadTrabajo.Guardar();
-            return Json(new { success = true, message = "El Hotel ha sido borrado." });
+            return Json(new { success = true, message = "El tipo de habitacion ha sido borrado." });
         }
     }
 }
