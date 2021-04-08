@@ -505,3 +505,7 @@ C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacio
 C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\ref\HotelFinalProgramacionAvanzada.dll
 C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.pdb
 C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.genruntimeconfig.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Areas\_ViewImports.cshtml.g.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Areas\_ViewStart.cshtml.g.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Views\Hotel\Index.cshtml.g.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Views\Hotel\Upsert.cshtml.g.cs

@@ -12,18 +12,20 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Repositorio
         {
             _db = db;
 
-            //EstadosReserva = new CategoriaRepositorio(db);
-            //Habitaciones = new CubiertaRepositorio(db);
-            //HotelEmpleados = new LibroRepositorio(db);
-            //Reservas = new UsuarioRepositorio(db);
-            //TiposHabitacion = new CompaniaRepositorio(db);
-            //Usuarios = new CompaniaRepositorio(db);
+            EstadosReserva = new EstadoReservaRepositorio(db);
+            Habitaciones = new HabitacionRepositorio(db);
+            Hoteles = new HotelRepositorio(db);
+            HotelEmpleados = new HotelEmpleadoRepositorio(db);
+            Reservas = new ReservaRepositorio(db);
+            TiposHabitacion = new TipoHabitacionRepositorio(db);
+            Usuarios = new UsuarioRepositorio(db);
         }
 
         readonly ApplicationDbContext _db;
 
         public IEstadoReservaRepositorio EstadosReserva { get; private set; }
         public IHabitacionRepositorio Habitaciones { get; private set; }
+        public IHotelRepositorio Hoteles { get; private set; }
         public IHotelEmpleadoRepositorio HotelEmpleados { get; private set; }
         public IReservaRepositorio Reservas { get; private set; }
         public ITipoHabitacionRepositorio TiposHabitacion { get; private set; }

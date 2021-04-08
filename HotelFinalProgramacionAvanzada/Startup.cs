@@ -87,7 +87,6 @@ namespace HotelFinalProgramacionAvanzada
 
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -95,6 +94,7 @@ namespace HotelFinalProgramacionAvanzada
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            
         }
     }
 }
