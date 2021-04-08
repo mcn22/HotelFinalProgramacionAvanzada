@@ -1,0 +1,49 @@
+﻿@model HotelFinalProgramacionAvanzada.Models.ViewModels.HabitacionViewModel
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Upsert" asp-route-id="@Model.Habitacion.HabitacionId" onsubmit="return PostForm(this);">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Habitacion.HabitacionId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Habitacion.Nombre" class="control-label"></label>
+                        <input asp-for="Habitacion.Nombre" class="form-control" />
+                        <span asp-validation-for="Habitacion.Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Habitacion.TipoHabitacionId" class="control-label"></label>
+                        @Html.DropDownListFor(s => s.Habitacion.TipoHabitacionId, Model.TiposHabitacion, "-Seleccione un Tipo", new { @class = "form-control" })
+                        <span asp-validation-for="Habitacion.TipoHabitacionId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Habitacion.HotelId" class="control-label"></label>
+                        @Html.DropDownListFor(s => s.Habitacion.HotelId, Model.Hoteles, "-Seleccione un Hotel", new { @class = "form-control" })
+                        <span asp-validation-for="Habitacion.HotelId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="Guardar" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
