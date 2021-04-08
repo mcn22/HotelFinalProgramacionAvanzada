@@ -1,0 +1,22 @@
+﻿@model IEnumerable<HotelFinalProgramacionAvanzada.Models.EstadoReserva>
+
+@{ ViewData["Title"] = "Listado de estados de la reserva"; }
+
+<h2 class="text-center">Listado de estados de la reserva</h2>
+
+<table class="table" id="tblEstadosReserva">
+    <thead class="thead-light">
+        <tr>
+            <th>Nombre</th>
+            <th>
+                <a onclick="ShowPopup('@Url.Action("Upsert", "EstadoReserva", null, Context.Request.Scheme)','Nuevo estado')" class="btn btn-success text-white"><i class="fas fa-random"></i> Nuevo Tipo de habitacion</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/estadoreserva.js"></script>
+}

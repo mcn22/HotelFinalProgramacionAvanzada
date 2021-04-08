@@ -511,3 +511,5 @@ C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacio
 C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Views\Hotel\Upsert.cshtml.g.cs
 C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Views\TipoHabitacion\Index.cshtml.g.cs
 C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Views\TipoHabitacion\Upsert.cshtml.g.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Views\EstadoReserva\Index.cshtml.g.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada\obj\Debug\net5.0\Razor\Views\EstadoReserva\Upsert.cshtml.g.cs

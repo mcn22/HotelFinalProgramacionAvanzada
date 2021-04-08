@@ -16,7 +16,7 @@ function loadDataTable() {
                 "data": "costoNoche",
                 "render": function (data) {
                     return `
-                           ₡${data}
+                           ₡ ${data}
                            `;
                 }, "width": "15%" },
 
