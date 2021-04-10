@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using HotelFinalProgramacionAvanzada.Utility
 @{
     ViewData["Title"] = "Register";
 }
@@ -37,6 +38,17 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            @if (User.IsInRole(SD.Roles.Administrador))
+            {
+                <div class="form-group">
+                    <label asp-for="Input.Role"></label>
+                    @Html.DropDownListFor(s => s.Input.Role, Model.Input.Roles, "- Seleccione un Rol", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.HotelId"></label>
+                    @Html.DropDownListFor(s => s.Input.HotelId, Model.Input.Hoteles, "- Seleccione un hotel", new { @class = "form-control" })
+                </div>
+            }
             <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>
     </div>

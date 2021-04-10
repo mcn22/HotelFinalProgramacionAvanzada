@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
@@ -79,11 +80,20 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string Role { get; set; }
+            public int? HotelId { get; set; }
+            public IEnumerable<SelectListItem> Hoteles { get; set; }
+            public IEnumerable<SelectListItem> Roles { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
+            Input =
+                new InputModel
+                {
+                    Hoteles = _unidadTrabajo.Hoteles.Listar().Select(s => new SelectListItem { Text = s.Nombre, Value = s.HotelId.ToString() }),
+                    Roles = _roleManager.Roles.Where(w => w.Name != SD.Roles.Cliente).Select(s => s.Name).Select(s => new SelectListItem { Text = s, Value = s })
+                };
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -99,6 +109,7 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     Nombre = Input.Nombre,
                     Apellido = Input.Apellido,
+                    HotelId = Input.HotelId,
                     Role = Input.Role
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -135,9 +146,29 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        var hotelEmpleado = new HotelEmpleado();
+                        if (Input.Role.ToString().Equals(SD.Roles.Empleado.ToString()))
+                        {
+                            hotelEmpleado = new HotelEmpleado
+                            {
+                                UserId = user.Id,
+                                HotelId = Input.HotelId
+                            };  
+                        }
+                        else {
+                            hotelEmpleado = new HotelEmpleado
+                            {
+                                UserId = user.Id,
+                                HotelId = null
+                            };
+                        }
+                        _unidadTrabajo.HotelEmpleados.Agregar(hotelEmpleado);
+                        _unidadTrabajo.Guardar();
                         await _userManager.AddToRoleAsync(user, user.Role);
                     }
                     // Fin del codigo para ejecutar despues de que se tiene un usuario y rol admin
+
+                    ///////////////////////////
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

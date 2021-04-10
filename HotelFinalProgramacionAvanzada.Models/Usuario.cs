@@ -20,5 +20,10 @@ namespace HotelFinalProgramacionAvanzada.Models
 
         [NotMapped]
         public string Role { get; set; }
+
+        public int? HotelId { get; set; }
+
+        [ForeignKey("HotelId")]
+        public Hotel Hotel { get; set; }
     }
 }

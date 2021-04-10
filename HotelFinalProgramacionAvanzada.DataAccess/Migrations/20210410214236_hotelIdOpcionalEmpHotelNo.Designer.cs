@@ -4,14 +4,16 @@ using HotelFinalProgramacionAvanzada.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelFinalProgramacionAvanzada.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210410214236_hotelIdOpcionalEmpHotelNo")]
+    partial class hotelIdOpcionalEmpHotelNo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,16 +111,11 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("HotelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("HotelEmpleadoId");
-
-                    b.HasIndex("HotelId");
 
                     b.HasIndex("UserId");
 
@@ -439,17 +436,11 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Migrations
 
             modelBuilder.Entity("HotelFinalProgramacionAvanzada.Models.HotelEmpleado", b =>
                 {
-                    b.HasOne("HotelFinalProgramacionAvanzada.Models.Hotel", "Hotel")
-                        .WithMany()
-                        .HasForeignKey("HotelId");
-
                     b.HasOne("HotelFinalProgramacionAvanzada.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Hotel");
 
                     b.Navigation("Usuario");
                 });
