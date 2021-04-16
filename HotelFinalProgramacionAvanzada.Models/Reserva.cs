@@ -27,8 +27,8 @@ namespace HotelFinalProgramacionAvanzada.Models
         public EstadoReserva EstadoReserva { get; set; }
         //////////////////////////////////////////////
 
-        [Required(ErrorMessage = "Debe especificar un empleado")]
-        [Display(Name = "Empleado")]
+        [Required(ErrorMessage = "Debe especificar un cliente")]
+        [Display(Name = "Cliente")]
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]

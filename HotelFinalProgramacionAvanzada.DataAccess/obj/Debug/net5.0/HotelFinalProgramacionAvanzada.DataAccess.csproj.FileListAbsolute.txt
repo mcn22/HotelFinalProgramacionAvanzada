@@ -1,0 +1,17 @@
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.deps.json
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\ref\HotelFinalProgramacionAvanzada.DataAccess.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.Models.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.Models.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\bin\Debug\net5.0\HotelFinalProgramacionAvanzada.Utility.pdb
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.csprojAssemblyReference.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.AssemblyInfoInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.AssemblyInfo.cs
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.csproj.CopyComplete
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\ref\HotelFinalProgramacionAvanzada.DataAccess.dll
+C:\Users\mcn_0\source\repos\HotelFinalProgramacionAvanzada\HotelFinalProgramacionAvanzada.DataAccess\obj\Debug\net5.0\HotelFinalProgramacionAvanzada.DataAccess.pdb
