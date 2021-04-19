@@ -76,6 +76,18 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "Microsoft.AspNetCore.Authentication.Google/5.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Authorization/5.0.4": {
         "type": "package",
         "dependencies": {
@@ -1768,6 +1780,19 @@
           }
         }
       },
+      "SendGrid/9.22.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1",
+          "starkbank-ecdsa": "[1.2.0, 2.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SendGrid.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.4": {
         "type": "package",
         "dependencies": {
@@ -1869,6 +1894,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll": {}
+        }
+      },
+      "starkbank-ecdsa/1.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/StarkbankEcdsa.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/StarkbankEcdsa.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -3471,7 +3505,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Identity.UI": "5.0.4"
+          "Microsoft.AspNetCore.Identity.UI": "5.0.4",
+          "SendGrid": "9.22.0"
         },
         "compile": {
           "bin/placeholder/HotelFinalProgramacionAvanzada.Utility.dll": {}
@@ -3571,6 +3606,21 @@
         "lib/net5.0/Microsoft.AspNetCore.Authentication.Facebook.xml",
         "microsoft.aspnetcore.authentication.facebook.5.0.4.nupkg.sha512",
         "microsoft.aspnetcore.authentication.facebook.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Google/5.0.5": {
+      "sha512": "6S5xW1Nxex6LmO+QKFSxw4oGT0Z2jBtRVOZfyjiatLgMX4mjRSqXEqyHvqADvmSEg5yEGdVSR/A3j4jbOhm6ag==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.google/5.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Authentication.Google.xml",
+        "microsoft.aspnetcore.authentication.google.5.0.5.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.google.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authorization/5.0.4": {
@@ -6081,6 +6131,29 @@
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
       ]
     },
+    "SendGrid/9.22.0": {
+      "sha512": "5vXkfOqPhi6W5/tEmRcTVJakT69SXiCGqVRERYF4ZAtJ4alylzlOqin6w8Xrog0Brf3RL+4BKXI+CwKbFLtteA==",
+      "type": "package",
+      "path": "sendgrid/9.22.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/SendGrid.dll",
+        "lib/net40/SendGrid.pdb",
+        "lib/net40/SendGrid.xml",
+        "lib/net452/SendGrid.dll",
+        "lib/net452/SendGrid.pdb",
+        "lib/net452/SendGrid.xml",
+        "lib/netstandard1.3/SendGrid.dll",
+        "lib/netstandard1.3/SendGrid.pdb",
+        "lib/netstandard1.3/SendGrid.xml",
+        "lib/netstandard2.0/SendGrid.dll",
+        "lib/netstandard2.0/SendGrid.pdb",
+        "lib/netstandard2.0/SendGrid.xml",
+        "sendgrid.9.22.0.nupkg.sha512",
+        "sendgrid.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.4": {
       "sha512": "f5U8Sw0lRym8tTraJ2zm6OqcDrcrEVvcKDtYlKSLs3Ox9SerkwkPXiFXb/uiW0g2tJdUw6oBhsxI/l5DoRxXMg==",
       "type": "package",
@@ -6152,6 +6225,22 @@
         "lib/netstandard2.0/SQLitePCLRaw.provider.dynamic_cdecl.dll",
         "sqlitepclraw.provider.dynamic_cdecl.2.0.4.nupkg.sha512",
         "sqlitepclraw.provider.dynamic_cdecl.nuspec"
+      ]
+    },
+    "starkbank-ecdsa/1.2.0": {
+      "sha512": "hP53QPYOOEIR44EK9phz+DYliM6DEieDZxpb8GZzE+++qyrWqUscKcyHCC6L9yu/ehllYtqxtT4qrjWDsuQlUQ==",
+      "type": "package",
+      "path": "starkbank-ecdsa/1.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/StarkbankEcdsa.dll",
+        "lib/net452/StarkbankEcdsa.dll",
+        "lib/netstandard1.3/StarkbankEcdsa.dll",
+        "lib/netstandard2.0/StarkbankEcdsa.dll",
+        "lib/netstandard2.1/StarkbankEcdsa.dll",
+        "starkbank-ecdsa.1.2.0.nupkg.sha512",
+        "starkbank-ecdsa.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -10535,6 +10624,7 @@
       "HotelFinalProgramacionAvanzada.Models >= 1.0.0",
       "HotelFinalProgramacionAvanzada.Utility >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Facebook >= 5.0.4",
+      "Microsoft.AspNetCore.Authentication.Google >= 5.0.5",
       "Microsoft.AspNetCore.Authorization >= 5.0.4",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 5.0.4",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.4",
@@ -10547,19 +10637,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mcn_0\\.nuget\\packages\\": {}
+    "C:\\Users\\yeiso\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
+      "projectUniqueName": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
       "projectName": "HotelFinalProgramacionAvanzada",
-      "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
-      "packagesPath": "C:\\Users\\mcn_0\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\obj\\",
+      "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
+      "packagesPath": "C:\\Users\\yeiso\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mcn_0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yeiso\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10573,14 +10663,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj"
+            "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj"
             },
-            "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj": {
-              "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj"
+            "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj": {
+              "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj"
             },
-            "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj": {
-              "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj"
+            "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj": {
+              "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj"
             }
           }
         }
@@ -10598,6 +10688,10 @@
           "Microsoft.AspNetCore.Authentication.Facebook": {
             "target": "Package",
             "version": "[5.0.4, )"
+          },
+          "Microsoft.AspNetCore.Authentication.Google": {
+            "target": "Package",
+            "version": "[5.0.5, )"
           },
           "Microsoft.AspNetCore.Authorization": {
             "target": "Package",
@@ -10656,7 +10750,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
