@@ -1,1 +1,4 @@
 HotelFinalProgramacionAvanzada/bin/Debug/*
+/HotelFinalProgramacionAvanzada.DataAccess/bin
+/HotelFinalProgramacionAvanzada.Models/bin
+/HotelFinalProgramacionAvanzada.Utility/bin
