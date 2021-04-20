@@ -75,6 +75,7 @@ namespace HotelFinalProgramacionAvanzada
                 options.ClientSecret = "hScsz2X1IDJqV7ccP8SVTQe4";
             });
 
+
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
             services.Configure<RequestLocalizationOptions>(options => {
@@ -95,6 +96,8 @@ namespace HotelFinalProgramacionAvanzada
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -121,7 +124,7 @@ namespace HotelFinalProgramacionAvanzada
                 endpoints.MapRazorPages();
             });
 
-            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
 
         }
     }
