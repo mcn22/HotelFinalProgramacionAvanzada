@@ -10637,19 +10637,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mcn_0\\.nuget\\packages\\": {}
+    "C:\\Users\\yeiso\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
+      "projectUniqueName": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
       "projectName": "HotelFinalProgramacionAvanzada",
-      "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
-      "packagesPath": "C:\\Users\\mcn_0\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\obj\\",
+      "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.csproj",
+      "packagesPath": "C:\\Users\\yeiso\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mcn_0\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yeiso\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10663,14 +10663,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj"
+            "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.DataAccess\\HotelFinalProgramacionAvanzada.DataAccess.csproj"
             },
-            "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj": {
-              "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj"
+            "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj": {
+              "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Models\\HotelFinalProgramacionAvanzada.Models.csproj"
             },
-            "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj": {
-              "projectPath": "C:\\Users\\mcn_0\\source\\repos\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj"
+            "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj": {
+              "projectPath": "C:\\Users\\yeiso\\Desktop\\HotelFinalProgramacionAvanzada\\HotelFinalProgramacionAvanzada.Utility\\HotelFinalProgramacionAvanzada.Utility.csproj"
             }
           }
         }
@@ -10750,7 +10750,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

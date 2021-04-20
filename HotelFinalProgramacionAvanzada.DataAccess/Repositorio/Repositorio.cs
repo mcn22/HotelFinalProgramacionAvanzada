@@ -31,6 +31,11 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Repositorio
             return _dbSet.Find(id);
         }
 
+        public T BuscarS(string id)
+        {
+            return _dbSet.Find(id);
+        }
+
         public T Buscar(Expression<Func<T, bool>> filtro = null, string propiedades = null)
         {
             IQueryable<T> query = _dbSet;

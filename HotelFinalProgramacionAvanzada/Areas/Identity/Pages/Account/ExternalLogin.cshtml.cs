@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using HotelFinalProgramacionAvanzada.Models;
+using HotelFinalProgramacionAvanzada.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -23,16 +25,19 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public ExternalLoginModel(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ILogger<ExternalLoginModel> logger,
+            RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
+            _roleManager = roleManager;
             _emailSender = emailSender;
         }
 
@@ -51,6 +56,10 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+            [Required]
+            public string Nombre { get; set; }
+            [Required]
+            public string Apellido { get; set; }
         }
 
         public IActionResult OnGetAsync()
@@ -121,11 +130,52 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+
+                if (!await _roleManager.RoleExistsAsync(SD.Roles.Administrador))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));
+                }
+                if (!await _roleManager.RoleExistsAsync(SD.Roles.Empleado))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Empleado));
+                }
+                if (!await _roleManager.RoleExistsAsync(SD.Roles.Cliente))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Cliente));
+                }
+                //fin Creacion de los roles
+                //*****************************************************************************//
+                //*****************************************************************************//
+                //Creacion el primer usuario con rol de administrador para el primer usuario
+                var userAdmin =
+                new Usuario
+                {
+                    UserName = "admin@admin.com",
+                    Email = "admin@admin.com",
+                    Nombre = "admin",
+                    PhoneNumber = "12345",
+                };
+                if (!_userManager.Users.Select(u => u.Email == u.Email).FirstOrDefault())
+                {
+                    await _userManager.CreateAsync(userAdmin, "Admin-2020");
+                    await _userManager.AddToRoleAsync(userAdmin, SD.Roles.Administrador);
+                }
+
+
+                var user =
+                    new Usuario
+                    {
+                        UserName = Input.Email,
+                        Email = Input.Email,
+                        Nombre = Input.Nombre,
+                        Apellido = Input.Apellido
+                    };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, SD.Roles.Cliente);
+
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {

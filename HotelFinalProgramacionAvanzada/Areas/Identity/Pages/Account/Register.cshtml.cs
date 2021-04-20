@@ -119,23 +119,36 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                     //*****************************************************************************//
                     //*****************************************************************************//
                     //Creacion de los roles en caso de que no existan para ejecutar la primera vez
-                    //if (!await _roleManager.RoleExistsAsync(SD.Roles.Administrador))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(SD.Roles.Empleado))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Empleado));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(SD.Roles.Cliente))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Cliente));
-                    //}
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Administrador))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Empleado))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Empleado));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Cliente))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Cliente));
+                    }
                     //fin Creacion de los roles
                     //*****************************************************************************//
                     //*****************************************************************************//
                     //Creacion el primer usuario con rol de administrador para el primer usuario
-                    //await _userManager.AddToRoleAsync(user, SD.Roles.Administrador);
+                    var userAdmin =
+                    new Usuario
+                    {
+                        UserName = "admin@admin.com",
+                        Email = "admin@admin.com",
+                        Nombre = "admin",
+                        PhoneNumber = "12345",
+                    };
+                    if (!_userManager.Users.Select(u => u.Email == u.Email).FirstOrDefault())
+                    {
+                        await _userManager.CreateAsync(userAdmin, "Admin-2020");
+                        await _userManager.AddToRoleAsync(userAdmin, SD.Roles.Administrador);
+                    }
+             
                     //Fin Creacion el primer usuario con rol de administrador
                     //*****************************************************************************//
                     //*****************************************************************************//
@@ -153,9 +166,10 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                             {
                                 UserId = user.Id,
                                 HotelId = Input.HotelId
-                            };  
+                            };
                         }
-                        else {
+                        else
+                        {
                             hotelEmpleado = new HotelEmpleado
                             {
                                 UserId = user.Id,

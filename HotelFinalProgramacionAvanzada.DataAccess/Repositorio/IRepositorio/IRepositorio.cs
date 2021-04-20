@@ -10,6 +10,8 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio
     {
         T Buscar(int id);
 
+        T BuscarS(string id);
+
         T Buscar(Expression<Func<T, bool>> filtro = null, string propiedades = null);
 
         IEnumerable<T> Listar(Expression<Func<T, bool>> filtro = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string propiedades = null);

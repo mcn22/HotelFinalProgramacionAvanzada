@@ -7,7 +7,9 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblHoteles').DataTable({
         "ajax": {
-            "url": "/Hotel/Listar"
+            "url": "/Hotel/Listar",
+            "type": "GET",
+            "datatype": "json"
         },
         "columns": [
             { "data": "nombre", "width": "15%" },
@@ -30,6 +32,23 @@ function loadDataTable() {
                            `;
                 }, "width": "40%"
             }
-        ]
+        ],
+        "language": {
+            "lengthMenu": "Desplegando _MENU_ registros por página",
+            "zeroRecords": "Lo sentimos, no se han encontrado registros.",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles.",
+            "infoFiltered": "(filtrado de _MAX_ registros.)",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Filtrar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        "width": "100%"
     });
 }
