@@ -11,16 +11,18 @@ namespace HotelFinalProgramacionAvanzada.Models
         public int HabitacionId { get; set; }
 
         [Required(ErrorMessage = "Debe especificar un tipo de habitación")]
-        [Display(Name = "Tipo de habitación")]
+        [DisplayName("Tipo de habitación")]
         public int TipoHabitacionId { get; set; }
 
+        [DisplayName("Tipo de habitación")]
         [ForeignKey("TipoHabitacionId")]
         public TipoHabitacion TipoHabitacion { get; set; }
 
         [Required(ErrorMessage = "Debe especificar un hotel")]
-        [Display(Name = "Tipo de habitación")]
+        [DisplayName("Tipo de habitación")]
         public int HotelId { get; set; }
 
+        [DisplayName("HotelId")]
         [ForeignKey("HotelId")]
         public Hotel Hotel { get; set; }
 

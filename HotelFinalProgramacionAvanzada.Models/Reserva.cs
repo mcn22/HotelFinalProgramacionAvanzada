@@ -12,7 +12,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         //////////////////////////////////////////////
 
         [Required(ErrorMessage = "Debe especificar una habitación")]
-        [Display(Name = "Habitacion")]
+        [DisplayName("Habitacion")]
         public int HabitacionId { get; set; }
 
         [ForeignKey("HabitacionId")]
@@ -20,7 +20,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         //////////////////////////////////////////////
 
         [Required(ErrorMessage = "Debe especificar un estado")]
-        [Display(Name = "Estado de la reserva")]
+        [DisplayName("Estado de la reserva")]
         public int EstadoReservaId { get; set; }
 
         [ForeignKey("EstadoReservaId")]
@@ -28,7 +28,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         //////////////////////////////////////////////
 
         [Required(ErrorMessage = "Debe especificar un cliente")]
-        [Display(Name = "Cliente")]
+        [DisplayName("Cliente")]
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]

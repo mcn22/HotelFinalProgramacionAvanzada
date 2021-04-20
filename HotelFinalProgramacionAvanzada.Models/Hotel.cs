@@ -19,6 +19,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string Descripcion { get; set; }
 
+        [DisplayName("UrlImagen")]
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string UrlImagen { get; set; }
 
@@ -26,6 +27,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         [Required(ErrorMessage = "Este campo es requerido.")]
         public string Direccion { get; set; }
 
+        [DisplayName("Ciudad")]
         [Required]
         [MaxLength(30, ErrorMessage = "El máximo es de 30 caracteres")]
         public string Ciudad { get; set; }

@@ -117,7 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="mensaje" xml:space="preserve">
-    <value>mensaje</value>
+  <data name="Apellido" xml:space="preserve">
+    <value>Lastname</value>
+  </data>
+  <data name="Ciudad" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Cliente" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="Costo por noche" xml:space="preserve">
+    <value>Cost per night</value>
+  </data>
+  <data name="Debe especificar un empleado" xml:space="preserve">
+    <value>You must specify an employee</value>
+  </data>
+  <data name="Descripción" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Dirección" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="El máximo es de 128 caracteres" xml:space="preserve">
+    <value>The maximum is 128 characters</value>
+  </data>
+  <data name="El máximo es de 150 caracteres" xml:space="preserve">
+    <value>The maximum is 150 characters</value>
+  </data>
+  <data name="El máximo es de 30 caracteres" xml:space="preserve">
+    <value>The maximum is 30 characters</value>
+  </data>
+  <data name="El máximo es de 50 caracteres" xml:space="preserve">
+    <value>The maximum is 50 characters</value>
+  </data>
+  <data name="Empleado" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Estado de la reserva" xml:space="preserve">
+    <value>Reservation status</value>
+  </data>
+  <data name="Estado de reserva" xml:space="preserve">
+    <value>Reservation status</value>
+  </data>
+  <data name="Este campo es requerido." xml:space="preserve">
+    <value>This field is required.</value>
+  </data>
+  <data name="Fecha de llegada" xml:space="preserve">
+    <value>Arrival date</value>
+  </data>
+  <data name="Fecha de salida" xml:space="preserve">
+    <value>Departure date</value>
+  </data>
+  <data name="Habitacion" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="HotelId" xml:space="preserve">
+    <value>Hotel Id</value>
+  </data>
+  <data name="Nombre" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Nombre de la habitación" xml:space="preserve">
+    <value>Room name</value>
+  </data>
+  <data name="Nombre del hotel" xml:space="preserve">
+    <value>Name of the hotel</value>
+  </data>
+  <data name="Nombre del tipo de habitacion" xml:space="preserve">
+    <value>Room type name</value>
+  </data>
+  <data name="Saldo" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="Teléfono" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="Tipo de habitación" xml:space="preserve">
+    <value>Type of room</value>
+  </data>
+  <data name="Total a pagar" xml:space="preserve">
+    <value>Total to pay</value>
+  </data>
+  <data name="UrlImagen" xml:space="preserve">
+    <value>Image Url</value>
   </data>
 </root>

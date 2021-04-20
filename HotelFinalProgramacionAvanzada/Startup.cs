@@ -2,6 +2,7 @@
 using HotelFinalProgramacionAvanzada.DataAccess.Data;
 using HotelFinalProgramacionAvanzada.DataAccess.Repositorio;
 using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
+using HotelFinalProgramacionAvanzada.Resources;
 using HotelFinalProgramacionAvanzada.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HotelFinalProgramacionAvanzada
@@ -77,13 +79,25 @@ namespace HotelFinalProgramacionAvanzada
 
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
-            services.Configure<RequestLocalizationOptions>(options => {
-                List<CultureInfo> supportedCultures = new List<CultureInfo>
-                        {
-                            new CultureInfo("es"),
-                            new CultureInfo("en"),
-                        };
+            services.AddSingleton<LocalizationService>();
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    {
+                        var assemblyName = new AssemblyName(typeof(ApplicationResource).GetTypeInfo().Assembly.FullName);
+                        return factory.Create("ApplicationResource", assemblyName.Name);
+                    };
+                });
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("es"),
+                };
                 options.DefaultRequestCulture = new RequestCulture("es");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
@@ -96,7 +110,6 @@ namespace HotelFinalProgramacionAvanzada
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
             if (env.IsDevelopment())
             {
@@ -113,6 +126,9 @@ namespace HotelFinalProgramacionAvanzada
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            var requestlocalizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(requestlocalizationOptions.Value);
 
             app.UseAuthentication();
             app.UseAuthorization();

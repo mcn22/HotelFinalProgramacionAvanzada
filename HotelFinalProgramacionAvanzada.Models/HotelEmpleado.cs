@@ -11,7 +11,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         public int HotelEmpleadoId { get; set; }
 
         [Required(ErrorMessage = "Debe especificar un empleado")]
-        [Display(Name = "Empleado")]
+        [DisplayName("Empleado")]
         public string UserId { get; set; }
 
         [ForeignKey("UserId")]
