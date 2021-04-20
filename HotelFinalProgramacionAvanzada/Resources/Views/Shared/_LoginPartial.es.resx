@@ -129,4 +129,7 @@
   <data name="Register" xml:space="preserve">
     <value>Registro</value>
   </data>
+  <data name="Usuario" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
 </root>

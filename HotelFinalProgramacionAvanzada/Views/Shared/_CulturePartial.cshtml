@@ -19,10 +19,16 @@
           method="post"
           class="form-horizontal nav-link text-dark"
           role="form">
-        <select name="culture"
+        
+        <select name="culture" class="form-control"
                 onchange="this.form.submit();"
                 asp-for="@requestCulture.RequestCulture.UICulture.Name"
                 asp-items="cultureItems">
         </select>
+
     </form>
+
+
+    
+
 </div>
