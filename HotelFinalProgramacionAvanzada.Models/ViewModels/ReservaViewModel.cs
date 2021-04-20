@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace HotelFinalProgramacionAvanzada.Models.ViewModels
 {
@@ -8,17 +9,22 @@ namespace HotelFinalProgramacionAvanzada.Models.ViewModels
     {
         public ReservaViewModel()
         {
-            Habitaciones = new List<SelectListItem>();
-            EstadosReserva = new List<SelectListItem>();
-            Usuarios = new List<SelectListItem>();
+            TiposHabitacionList = new List<TipoHabitacion>();
+            Hotel = new Hotel();
+            Reserva = new Reserva();
             Disponible = false;
-            diasHospedaje = 0;
+            DiasHospedaje = 0;
+            TiposHabitacionDD = new List<SelectListItem>();
+            TipoHabitacionId = 0;
         }
         public Reserva Reserva { get; set; }
         public bool Disponible { get; set; }
-        public int diasHospedaje { get; set;}
-        public List<SelectListItem> Habitaciones { get; set; } 
-        public List<SelectListItem> EstadosReserva { get; set; }
-        public List<SelectListItem> Usuarios { get; set; }
+        public int DiasHospedaje { get; set;}
+
+        [DisplayName("Tipo de habitacion")]
+        public int TipoHabitacionId { get; set; }
+        public List<TipoHabitacion> TiposHabitacionList { get; set; } 
+        public Hotel Hotel { get; set; }
+        public List<SelectListItem> TiposHabitacionDD { get; set; }
     }
 }

@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\hoteles\hotel1.jpg" />
+    <None Include="wwwroot\images\hoteles\hotel2.jpg" />
+    <None Include="wwwroot\images\hoteles\hotel3.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />

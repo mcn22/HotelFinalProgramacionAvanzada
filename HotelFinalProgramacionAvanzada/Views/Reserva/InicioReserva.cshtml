@@ -1,0 +1,25 @@
+﻿@model IEnumerable<HotelFinalProgramacionAvanzada.Models.Hotel>
+
+@{ ViewData["Title"] = "Listado de hoteles"; }
+
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h2>Selecciona el hotel</h2>
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3 col-md-4 mt-3" style="float:left">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top img-responsive" src="~/images/hoteles/hotel1.jpg" alt="Hotel @Html.DisplayFor(modelItem => item.Nombre)">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                        <p>Ubicado en @Html.DisplayFor(modelItem => item.Ciudad)</p>
+                        <button class="btn btn-primary">
+                            @Html.ActionLink("Crear reserva", "PreReserva", new { id = item.HotelId }, new { @class = "text-white" })
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
