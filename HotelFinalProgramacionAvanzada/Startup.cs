@@ -1,3 +1,4 @@
+
 using HotelFinalProgramacionAvanzada.DataAccess.Data;
 using HotelFinalProgramacionAvanzada.DataAccess.Repositorio;
 using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
@@ -7,12 +8,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,14 +60,35 @@ namespace HotelFinalProgramacionAvanzada
                 }
               );
 
-            //services.AddAuthentication().AddFacebook
-            //  (
-            //    options =>
-            //    {
-            //        options.AppId = "1575719865965523";
-            //        options.AppSecret = "dbbb14762e78bf8834b79634b259f892";
-            //    }
-            //  );
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "496519634709007";
+                options.AppSecret = "fcc2dc274927e17dde496aa9b0f41c6f";
+            }
+                         );
+
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                //IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+                options.ClientId = "789560180741-tiiblhpri19hmqm9489ndm7mrh29enpa.apps.googleusercontent.com";
+                options.ClientSecret = "hScsz2X1IDJqV7ccP8SVTQe4";
+            });
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
+            services.Configure<RequestLocalizationOptions>(options => {
+                List<CultureInfo> supportedCultures = new List<CultureInfo>
+                        {
+                            new CultureInfo("es"),
+                            new CultureInfo("en"),
+                        };
+                options.DefaultRequestCulture = new RequestCulture("es");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
+            services.Configure<SendGridOptions>(Configuration.GetSection(SendGridOptions.Section));
 
         }
 
@@ -94,7 +120,9 @@ namespace HotelFinalProgramacionAvanzada
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            
+
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
         }
     }
 }
