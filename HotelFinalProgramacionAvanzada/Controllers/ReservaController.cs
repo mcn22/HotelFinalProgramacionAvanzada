@@ -44,7 +44,8 @@
                 };
             modelo.Reserva = new Reserva();
             return View(modelo);
-        }
+        }        
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -62,6 +63,7 @@
                     Reserva reserva =
                         new Reserva
                         {
+                            ReservaId = 0,
                             HabitacionId = idHabitacion,
                             EstadoReservaId = _unidadTrabajo.EstadosReserva.Listar().Where(e => e.NombreEstado == Utility.SD.EstadosReserva.Pre).FirstOrDefault().EstadoReservaId,
                             UserId = modelo.Reserva.UserId,
@@ -75,8 +77,8 @@
                 else
                 {
                     TempData["Mensaje"] = "No hay disponibilidad actualmente.";
-                    //return RedirectToAction("PreReserva", new { id = modelo.Hotel.HotelId });
-                    return RedirectToAction("../Account/Login");
+                    return RedirectToAction("PreReserva", new { id = modelo.Hotel.HotelId });
+                    //return RedirectToAction("../Account/Login");
                 }
             }
             else
@@ -85,12 +87,10 @@
             }
         }
 
+
         public IActionResult ConfirmarReserva(Reserva reserva)
         {
-            
-            var algo = reserva;
-            var algo2 = reserva.FechaLlegada;
-            return View();
+            return View(reserva);
         }
 
         [HttpGet]
@@ -199,7 +199,8 @@
                 var estadoCancelado = _unidadTrabajo.EstadosReserva.Listar().Where(e => e.NombreEstado == Utility.SD.EstadosReserva.Suspendida).FirstOrDefault();
                 foreach (var habitacion in habitaciones)
                 {
-                    var reservas = _unidadTrabajo.Reservas.Listar().Where(r => r.Habitacion.HabitacionId == habitacion.HabitacionId && r.EstadoReservaId != estadoCancelado.EstadoReservaId).ToList();
+                    var reservas = _unidadTrabajo.Reservas.Listar().Where(r => r.Habitacion.HabitacionId == habitacion.HabitacionId && 
+                    r.EstadoReservaId != estadoCancelado.EstadoReservaId).ToList();
                     if (reservas.Count == 0)
                     {
                         resultado = habitacion.HabitacionId;

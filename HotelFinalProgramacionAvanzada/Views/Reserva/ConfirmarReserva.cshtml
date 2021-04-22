@@ -1,0 +1,59 @@
+﻿@model HotelFinalProgramacionAvanzada.Models.Reserva
+
+@{ ViewData["Title"] = "Confirmar reserva"; }
+
+@{
+    var dias = Convert.ToInt32((Model.FechaSalida - Model.FechaLlegada).TotalDays);
+ }
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="ConfirmarReserva">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ReservaId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FechaLlegada" class="control-label"></label>
+                        <input asp-for="FechaLlegada.Date" class="form-control" type="date" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FechaSalida" class="control-label"></label>
+                        <input asp-for="FechaSalida.Date" class="form-control" type="date" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label  class="control-label">Dias de hospedaje</label>
+                        <input asp-for="@dias" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CostoTotal" class="control-label"></label>
+                        <input asp-for="CostoTotal" class="form-control" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6 offset-md-3">
+                    <input type="submit" value="Confirmar reserva" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
