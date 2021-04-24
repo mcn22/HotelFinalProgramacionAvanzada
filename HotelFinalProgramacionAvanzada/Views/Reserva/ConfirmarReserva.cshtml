@@ -1,52 +1,65 @@
-﻿@model HotelFinalProgramacionAvanzada.Models.Reserva
+﻿@model HotelFinalProgramacionAvanzada.Models.ViewModels.ReservaDemoViewModel
 
 @{ ViewData["Title"] = "Confirmar reserva"; }
-
-@{
-    var dias = Convert.ToInt32((Model.FechaSalida - Model.FechaLlegada).TotalDays);
- }
-
 
 <div class="row">
     <div class="col-md-12">
         <form asp-action="ConfirmarReserva">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ReservaId" />
+            <input type="hidden" asp-for="Reserva.HabitacionId" />
+            <input type="hidden" asp-for="Reserva.UserId" />
+            <input type="hidden" asp-for="Reserva.CostoTotal" />
+            <input type="hidden" asp-for="Llegada" />
+            <input type="hidden" asp-for="Salida" />
+
+
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 mt-3">
+                    <h2>Confirma los datos de tu reserva</h2>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                @{
+                    var dias = Convert.ToInt32((Model.Reserva.FechaSalida - Model.Reserva.FechaLlegada).TotalDays);
+                    DateTime llegada = Model.Reserva.FechaLlegada;
+                    DateTime salida = Model.Reserva.FechaSalida;
+
+
+                }
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="FechaLlegada" class="control-label"></label>
-                        <input asp-for="FechaLlegada.Date" class="form-control" type="date" disabled />
+                        <label asp-for="Reserva.FechaLlegada" style="font-size: 23px"></label>
+                        <input type="hidden" asp-for="Reserva.FechaLlegada" />
+                        <h6 class="ml-3">@llegada.Day/@llegada.Month/@llegada.Year</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="Reserva.FechaSalida" style="font-size: 23px"></label>
+                        <input type="hidden" asp-for="Reserva.FechaSalida" />
+                        <h6 class="ml-3">@salida.Day/@salida.Month/@salida.Year</h6>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label asp-for="FechaSalida" class="control-label"></label>
-                        <input asp-for="FechaSalida.Date" class="form-control" type="date" disabled />
+                        <label class="control-label" style="font-size: 23px">Dias de hospedaje</label>
+                        <h6 class="ml-3">@dias días</h6>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <label  class="control-label">Dias de hospedaje</label>
-                        <input asp-for="@dias" class="form-control" disabled />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="CostoTotal" class="control-label"></label>
-                        <input asp-for="CostoTotal" class="form-control" disabled />
+                        <label asp-for="Reserva.CostoTotal" class="control-label" style="font-size: 23px"></label>
+                        <h6 class="ml-3">₡@Model.Reserva.CostoTotal</h6>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-6 offset-md-3">
-                    <input type="submit" value="Confirmar reserva" class="btn btn-primary btn-block" />
+                <div class="col-md-6">
+                    <hr />
+                    <input type="submit" value="Confirmar reserva" class="btn btn-primary btn-block mt-3" />
                 </div>
             </div>
         </form>
@@ -57,3 +70,5 @@
 {
     <partial name="_ValidationScriptsPartial" />
 }
+
+

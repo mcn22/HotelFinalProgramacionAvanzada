@@ -43,6 +43,9 @@
                     TiposHabitacionDD = _unidadTrabajo.TiposHabitacion.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre, s.TipoHabitacionId.ToString())),
                 };
             modelo.Reserva = new Reserva();
+            modelo.Reserva.FechaLlegada = DateTime.Now;
+            modelo.Reserva.FechaSalida = DateTime.Now;
+            modelo.Reserva.FechaSalida.AddDays(2);
             return View(modelo);
         }        
         
@@ -59,26 +62,13 @@
                     modelo.DiasHospedaje = CalculaDiasHospedaje(modelo.Reserva.FechaLlegada, modelo.Reserva.FechaSalida);
                     modelo.Reserva.CostoTotal = CalculaCosto(modelo.DiasHospedaje, modelo.TipoHabitacionId);
                     modelo.Reserva.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-                    Reserva reserva =
-                        new Reserva
-                        {
-                            ReservaId = 0,
-                            HabitacionId = idHabitacion,
-                            EstadoReservaId = _unidadTrabajo.EstadosReserva.Listar().Where(e => e.NombreEstado == Utility.SD.EstadosReserva.Pre).FirstOrDefault().EstadoReservaId,
-                            UserId = modelo.Reserva.UserId,
-                            CostoTotal = modelo.Reserva.CostoTotal,
-                            Saldo = modelo.Reserva.CostoTotal,
-                            FechaLlegada = modelo.Reserva.FechaLlegada,
-                            FechaSalida = modelo.Reserva.FechaSalida
-                        };
-                    return RedirectToAction("ConfirmarReserva", reserva);
+                    modelo.Reserva.HabitacionId = idHabitacion;
+                    return RedirectToAction("ConfirmarReserva",modelo.Reserva);
                 }
                 else
                 {
-                    TempData["Mensaje"] = "No hay disponibilidad actualmente.";
-                    return RedirectToAction("PreReserva", new { id = modelo.Hotel.HotelId });
-                    //return RedirectToAction("../Account/Login");
+                    //return RedirectToAction("PreReserva", new { id = modelo.Hotel.HotelId });
+                    return Json(new { success = false, message = "No hay disponibilidad." });
                 }
             }
             else
@@ -88,76 +78,96 @@
         }
 
 
-        public IActionResult ConfirmarReserva(Reserva reserva)
+        public IActionResult ConfirmarReserva(Reserva modelo)
         {
-            return View(reserva);
-        }
-
-        [HttpGet]
-        public IActionResult Upsert(int id = 0)
-        {
-            ReservaDemoViewModel modelo =
-                new ReservaDemoViewModel
-                {
-                    Habitaciones = _unidadTrabajo.Habitaciones.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre, s.HabitacionId.ToString())),
-                    EstadosReserva = _unidadTrabajo.EstadosReserva.Listar().ToList().ConvertAll(s => new SelectListItem(s.NombreEstado, s.EstadoReservaId.ToString())),
-                    Usuarios = _unidadTrabajo.Usuarios.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre + " " + s.Apellido, s.Id.ToString()))
-                };
-
-            if (id == 0)
-            {
-                modelo.Reserva = new Reserva();
-                return View(modelo);
-            }
-            else
-            {
-                var h = _unidadTrabajo.Reservas.Buscar(id);
-                if (h == null)
-                {
-                    return NotFound();
-                }
-
-                modelo.Reserva = h;
-                return View(modelo);
-            }
+            ReservaDemoViewModel modeloDemo = new ReservaDemoViewModel();
+            modeloDemo.Llegada = modelo.FechaLlegada.ToString();
+            modeloDemo.Salida = modelo.FechaSalida.ToString();
+            modeloDemo.Reserva = modelo;
+            return View(modeloDemo);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(int id, ReservaDemoViewModel modelo)
+        public IActionResult ConfirmarReserva(ReservaDemoViewModel modelo)
         {
             if (ModelState.IsValid)
             {
-                if (id == 0)
-                {
-                    _unidadTrabajo.Reservas.Agregar(modelo.Reserva);
-                    _unidadTrabajo.Guardar();
-                }
-                else
-                {
-                    try
-                    {
-                        _unidadTrabajo.Reservas.Actualizar(modelo.Reserva);
-                        _unidadTrabajo.Guardar();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (_unidadTrabajo.Reservas.Buscar(modelo.Reserva.ReservaId) == null)
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                }
-
-                return Json(new { success = true, message = "La Reserva ha sido guardada." });
+                modelo.Reserva.Saldo = modelo.Reserva.CostoTotal - (modelo.Reserva.CostoTotal * (decimal)0.30);
+                modelo.Reserva.EstadoReservaId = _unidadTrabajo.EstadosReserva.Listar().Where(e => e.NombreEstado == Utility.SD.EstadosReserva.Adelanto)
+                            .FirstOrDefault().EstadoReservaId;
+                _unidadTrabajo.Reservas.Agregar(modelo.Reserva);
+                _unidadTrabajo.Guardar();
+                return RedirectToAction("../Reserva/Index");
             }
-
             return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
         }
+
+        //[HttpGet]
+        //public IActionResult Upsert(int id = 0)
+        //{
+        //    ReservaViewModel modelo =
+        //        new ReservaViewModel
+        //        {
+        //            Habitaciones = _unidadTrabajo.Habitaciones.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre, s.HabitacionId.ToString())),
+        //            EstadosReserva = _unidadTrabajo.EstadosReserva.Listar().ToList().ConvertAll(s => new SelectListItem(s.NombreEstado, s.EstadoReservaId.ToString())),
+        //            Usuarios = _unidadTrabajo.Usuarios.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre + " " + s.Apellido, s.Id.ToString()))
+        //        };
+
+        //    if (id == 0)
+        //    {
+        //        modelo.Reserva = new Reserva();
+        //        return View(modelo);
+        //    }
+        //    else
+        //    {
+        //        var h = _unidadTrabajo.Reservas.Buscar(id);
+        //        if (h == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        modelo.Reserva = h;
+        //        return View(modelo);
+        //    }
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Upsert(int id, ReservaViewModel modelo)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (id == 0)
+        //        {
+        //            _unidadTrabajo.Reservas.Agregar(modelo.Reserva);
+        //            _unidadTrabajo.Guardar();
+        //        }
+        //        else
+        //        {
+        //            try
+        //            {
+        //                _unidadTrabajo.Reservas.Actualizar(modelo.Reserva);
+        //                _unidadTrabajo.Guardar();
+        //            }
+        //            catch (DbUpdateConcurrencyException)
+        //            {
+        //                if (_unidadTrabajo.Reservas.Buscar(modelo.Reserva.ReservaId) == null)
+        //                {
+        //                    return NotFound();
+        //                }
+        //                else
+        //                {
+        //                    throw;
+        //                }
+        //            }
+        //        }
+
+        //        return Json(new { success = true, message = "La Reserva ha sido guardada." });
+        //    }
+
+        //    return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
+        //}
 
         [HttpGet]
         public IActionResult Listar()

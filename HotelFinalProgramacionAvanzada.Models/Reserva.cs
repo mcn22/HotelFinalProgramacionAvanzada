@@ -50,13 +50,15 @@ namespace HotelFinalProgramacionAvanzada.Models
 
         [Required]
         [DisplayName("Fecha de llegada")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime FechaLlegada { get; set; }
         //////////////////////////////////////////////
 
         [Required]
         [DisplayName("Fecha de salida")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime FechaSalida { get; set; }
     }
 }
