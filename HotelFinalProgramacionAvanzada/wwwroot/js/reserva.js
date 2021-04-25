@@ -10,8 +10,8 @@ function loadDataTable() {
             "url": "/Reserva/Listar"
         },
         "columns": [
-            { "data": "reservaId", "width": "5%" },
-            { "data": "usuario.nombre", "width": "15%" },
+            { "data": "habitacion.tipoHabitacion.nombre", "width": "15%" },
+            { "data": "habitacion.nombre", "width": "15%" },
             { "data": "habitacion.hotel.nombre", "width": "15%" },
             {
                 "data": "reservaId",
@@ -48,3 +48,4 @@ function loadDataTable() {
         "width": "100%"
     });
 }
+

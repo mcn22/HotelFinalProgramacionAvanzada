@@ -1,16 +1,16 @@
-﻿namespace HotelFinalProgramacionAvanzada.Controllers
-{
-    using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
-    using HotelFinalProgramacionAvanzada.Models;
-    using HotelFinalProgramacionAvanzada.Models.ViewModels;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Linq;
-    using System.Security.Claims;
+﻿using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
+using HotelFinalProgramacionAvanzada.Models;
+using HotelFinalProgramacionAvanzada.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Security.Claims;
 
+namespace HotelFinalProgramacionAvanzada.Controllers
+{
     public class ReservaController : Controller
     {
         public ReservaController(IUnidadTrabajo unidadTrabajo, UserManager<IdentityUser> userManager)
@@ -44,11 +44,9 @@
                 };
             modelo.Reserva = new Reserva();
             modelo.Reserva.FechaLlegada = DateTime.Now;
-            modelo.Reserva.FechaSalida = DateTime.Now;
-            modelo.Reserva.FechaSalida.AddDays(2);
+            modelo.Reserva.FechaSalida = DateTime.Now.AddDays(1);
             return View(modelo);
-        }        
-        
+        }                
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -77,7 +75,6 @@
             }
         }
 
-
         public IActionResult ConfirmarReserva(Reserva modelo)
         {
             ReservaDemoViewModel modeloDemo = new ReservaDemoViewModel();
@@ -98,82 +95,27 @@
                             .FirstOrDefault().EstadoReservaId;
                 _unidadTrabajo.Reservas.Agregar(modelo.Reserva);
                 _unidadTrabajo.Guardar();
-                return RedirectToAction("../Reserva/Index");
+                return RedirectToAction("Index");
             }
             return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
         }
-
-        //[HttpGet]
-        //public IActionResult Upsert(int id = 0)
-        //{
-        //    ReservaViewModel modelo =
-        //        new ReservaViewModel
-        //        {
-        //            Habitaciones = _unidadTrabajo.Habitaciones.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre, s.HabitacionId.ToString())),
-        //            EstadosReserva = _unidadTrabajo.EstadosReserva.Listar().ToList().ConvertAll(s => new SelectListItem(s.NombreEstado, s.EstadoReservaId.ToString())),
-        //            Usuarios = _unidadTrabajo.Usuarios.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre + " " + s.Apellido, s.Id.ToString()))
-        //        };
-
-        //    if (id == 0)
-        //    {
-        //        modelo.Reserva = new Reserva();
-        //        return View(modelo);
-        //    }
-        //    else
-        //    {
-        //        var h = _unidadTrabajo.Reservas.Buscar(id);
-        //        if (h == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        modelo.Reserva = h;
-        //        return View(modelo);
-        //    }
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Upsert(int id, ReservaViewModel modelo)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (id == 0)
-        //        {
-        //            _unidadTrabajo.Reservas.Agregar(modelo.Reserva);
-        //            _unidadTrabajo.Guardar();
-        //        }
-        //        else
-        //        {
-        //            try
-        //            {
-        //                _unidadTrabajo.Reservas.Actualizar(modelo.Reserva);
-        //                _unidadTrabajo.Guardar();
-        //            }
-        //            catch (DbUpdateConcurrencyException)
-        //            {
-        //                if (_unidadTrabajo.Reservas.Buscar(modelo.Reserva.ReservaId) == null)
-        //                {
-        //                    return NotFound();
-        //                }
-        //                else
-        //                {
-        //                    throw;
-        //                }
-        //            }
-        //        }
-
-        //        return Json(new { success = true, message = "La Reserva ha sido guardada." });
-        //    }
-
-        //    return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
-        //}
-
+    
         [HttpGet]
         public IActionResult Listar()
         {
-            return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Usuario,Habitacion.Hotel") });
+            if (User.IsInRole(Utility.SD.Roles.Cliente))
+            {
+                var data = _unidadTrabajo.Reservas.Listar(propiedades: "Habitacion.TipoHabitacion,Habitacion,Habitacion.Hotel");
+                return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Habitacion.TipoHabitacion,Habitacion,Habitacion.Hotel").
+                    Where(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))});
+            }
+            else { 
+                return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Usuario,Habitacion.Hotel") });
+            }
         }
+
+
+        //Where(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
 
         [HttpDelete]
         public IActionResult Borrar(int id)
@@ -244,3 +186,70 @@
         }
     }
 }
+
+
+//[HttpGet]
+//public IActionResult Upsert(int id = 0)
+//{
+//    ReservaViewModel modelo =
+//        new ReservaViewModel
+//        {
+//            Habitaciones = _unidadTrabajo.Habitaciones.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre, s.HabitacionId.ToString())),
+//            EstadosReserva = _unidadTrabajo.EstadosReserva.Listar().ToList().ConvertAll(s => new SelectListItem(s.NombreEstado, s.EstadoReservaId.ToString())),
+//            Usuarios = _unidadTrabajo.Usuarios.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre + " " + s.Apellido, s.Id.ToString()))
+//        };
+
+//    if (id == 0)
+//    {
+//        modelo.Reserva = new Reserva();
+//        return View(modelo);
+//    }
+//    else
+//    {
+//        var h = _unidadTrabajo.Reservas.Buscar(id);
+//        if (h == null)
+//        {
+//            return NotFound();
+//        }
+
+//        modelo.Reserva = h;
+//        return View(modelo);
+//    }
+//}
+
+//[HttpPost]
+//[ValidateAntiForgeryToken]
+//public IActionResult Upsert(int id, ReservaViewModel modelo)
+//{
+//    if (ModelState.IsValid)
+//    {
+//        if (id == 0)
+//        {
+//            _unidadTrabajo.Reservas.Agregar(modelo.Reserva);
+//            _unidadTrabajo.Guardar();
+//        }
+//        else
+//        {
+//            try
+//            {
+//                _unidadTrabajo.Reservas.Actualizar(modelo.Reserva);
+//                _unidadTrabajo.Guardar();
+//            }
+//            catch (DbUpdateConcurrencyException)
+//            {
+//                if (_unidadTrabajo.Reservas.Buscar(modelo.Reserva.ReservaId) == null)
+//                {
+//                    return NotFound();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
+//        }
+
+//        return Json(new { success = true, message = "La Reserva ha sido guardada." });
+//    }
+
+//    return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
+//}
