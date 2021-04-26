@@ -16,12 +16,14 @@ namespace HotelFinalProgramacionAvanzada
 
         public static async Task<bool> InitAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
+            bool estado = false;
             var RoleManager = roleManager;
             var UserManager = userManager;
 
             if (!await RoleManager.RoleExistsAsync(SD.Roles.Administrador))
             {
                 await RoleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));
+                estado = true;
             }
             if (!await RoleManager.RoleExistsAsync(SD.Roles.Empleado))
             {
@@ -44,7 +46,7 @@ namespace HotelFinalProgramacionAvanzada
                 await UserManager.CreateAsync(user, "Admin-2020");
                 await UserManager.AddToRoleAsync(user, SD.Roles.Administrador);
             }
-            return true;
+            return estado;
         }
     }
 }

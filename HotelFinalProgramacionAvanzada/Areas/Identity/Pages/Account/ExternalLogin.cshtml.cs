@@ -123,6 +123,7 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
         {
+
             returnUrl = returnUrl ?? Url.Content("~/");
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();
@@ -134,13 +135,6 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-
-                await Setup.InitAsync(_userManager, _roleManager);
-                creaEstadosreservaBase();
-                creaTiposHabitacionreservaBase();
-                creaHotelesBase();
-
-
                 var user =
                     new Usuario
                     {
@@ -153,6 +147,31 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Administrador))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));
+                        var administrador =
+                        new Usuario
+                        {
+                            UserName = "admin@admin.com",
+                            Email = "admin@admin.com",
+                            Nombre = "admin",
+                            PhoneNumber = "12345",
+                        };
+                        await _userManager.CreateAsync(administrador, "Admin-2020");
+                        await _userManager.AddToRoleAsync(administrador, SD.Roles.Administrador);
+                        creaEstadosreservaBase();
+                        creaTiposHabitacionreservaBase();
+                        creaHotelesBase();
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Empleado))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Empleado));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Cliente))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Cliente));
+                    }                    
                     await _userManager.AddToRoleAsync(user, SD.Roles.Cliente);
 
                     result = await _userManager.AddLoginAsync(user, info);

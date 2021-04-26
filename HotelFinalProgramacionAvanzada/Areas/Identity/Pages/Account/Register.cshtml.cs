@@ -110,17 +110,47 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                     Nombre = Input.Nombre,
                     Apellido = Input.Apellido,
                     HotelId = Input.HotelId,
-                    Role = Input.Role
+                    Role = Input.Role               
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    //if (await Setup.InitAsync(_userManager, _roleManager))
+                    //{
+                    //creaEstadosreservaBase();
+                    //creaTiposHabitacionreservaBase();
+                    //creaHotelesBase();
+                    //}+
+
                     _logger.LogInformation("User created a new account with password.");
 
-                    await Setup.InitAsync(_userManager, _roleManager);
-                    creaEstadosreservaBase();
-                    creaTiposHabitacionreservaBase();
-                    creaHotelesBase();
+                    //Creacion de los roles y del admin si no estan
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Administrador))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));                    
+                        var administrador =
+                        new Usuario
+                        {
+                            UserName = "admin@admin.com",
+                            Email = "admin@admin.com",
+                            Nombre = "admin",
+                            PhoneNumber = "12345",
+                        };                        
+                        await _userManager.CreateAsync(administrador, "Admin-2020");
+                        await _userManager.AddToRoleAsync(administrador, SD.Roles.Administrador);
+                        creaEstadosreservaBase();
+                        creaTiposHabitacionreservaBase();
+                        creaHotelesBase();
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Empleado))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Empleado));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Roles.Cliente))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Cliente));
+                    }
+
 
                     if (string.IsNullOrEmpty(Input.Role))
                     {
@@ -128,14 +158,17 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        await _userManager.AddToRoleAsync(user, user.Role);
                         var hotelEmpleado = new HotelEmpleado();
-                        if (Input.Role.ToString().Equals(SD.Roles.Empleado.ToString()))
+                        if (Input.Role.ToString().Equals(SD.Roles.Empleado))
                         {
                             hotelEmpleado = new HotelEmpleado
                             {
                                 UserId = user.Id,
                                 HotelId = Input.HotelId
-                            };
+                            };                        
+                            _unidadTrabajo.HotelEmpleados.Agregar(hotelEmpleado);
+                            _unidadTrabajo.Guardar();
                         }
                         else
                         {
@@ -144,10 +177,10 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                                 UserId = user.Id,
                                 HotelId = null
                             };
+                            _unidadTrabajo.HotelEmpleados.Agregar(hotelEmpleado);
+                            _unidadTrabajo.Guardar();
                         }
-                        _unidadTrabajo.HotelEmpleados.Agregar(hotelEmpleado);
-                        _unidadTrabajo.Guardar();
-                        await _userManager.AddToRoleAsync(user, user.Role);
+                        return LocalRedirect("~/Usuario/Index");
                     }
                     // Fin del codigo para ejecutar despues de que se tiene un usuario y rol admin
 

@@ -62,12 +62,16 @@ namespace HotelFinalProgramacionAvanzada.Controllers
                 (
                     usuario =>
                     {
-                        var roleId = userRoles.FirstOrDefault(s => s.UserId == usuario.Usuario.Id).RoleId;
-                            usuario.Usuario.Role = roles.FirstOrDefault(s => s.Id == roleId).Name;
-                        if (usuario.Hotel == null)
+                        if (usuario.Usuario.Email != "admin@admin.com")
                         {
-                            usuario.Hotel = new Hotel { Nombre = string.Empty};
+                            var roleId = userRoles.FirstOrDefault(s => s.UserId == usuario.Usuario.Id).RoleId;
+                                usuario.Usuario.Role = roles.FirstOrDefault(s => s.Id == roleId).Name;
+                            if (usuario.Hotel == null)
+                            {
+                                usuario.Hotel = new Hotel { Nombre = string.Empty};
+                            }
                         }
+
                     }
                 );
 
