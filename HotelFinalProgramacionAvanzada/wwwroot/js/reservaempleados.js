@@ -10,23 +10,36 @@ function loadDataTable() {
             "url": "/Reserva/Listar"
         },
         "columns": [
-            { "data": "habitacion.tipoHabitacion.nombre", "width": "15%" },
-            { "data": "habitacion.nombre", "width": "15%" },
-            { "data": "habitacion.hotel.nombre", "width": "15%" },
+            { "data": "estadoReserva.nombreEstado", "width": "5%" },
+            { "data": "habitacion.nombre", "width": "5%" },
+            { "data": "usuario.email", "width": "15%" },
+            {
+                "data": "fechaLlegada", "width": "8%", "render": function (data) {
+                    var date = new Date(data);
+                    var month = date.getMonth() + 1;
+                    return date.getDate() + "/" + (month.length > 1 ? month : month) + "/" + date.getFullYear();
+                }
+            },
+            {
+                "data": "fechaSalida", "width": "8%", "render": function (data) {
+                    var date = new Date(data);
+                    var month = date.getMonth() + 1;
+                    return date.getDate() + "/" + (month.length > 1 ? month : month) + "/" + date.getFullYear();
+                }
+            },
+            { "data": "costoTotal", "width": "5%" },
+            { "data": "saldo", "width": "5%" },
             {
                 "data": "reservaId",
                 "render": function (data) {
                     return `
                             <div class="text-center">
-                                <a onclick="ShowPopup('/Reserva/Upsert/?id=${data}','Actualizar Reserva')" class="btn btn-success text-white" style="cursor:pointer">
+                                <a onclick="ShowPopup('/Reserva/CambiaEstado/?id=${data}','Cambiar el estado')" class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i> 
-                                </a>
-                                <a onclick=Borrar("/Reserva/Borrar/?id=${data}") class="btn btn-danger text-white" style="cursor:pointer">
-                                    <i class="fas fa-trash-alt"></i> 
                                 </a>
                             </div>
                            `;
-                }, "width": "40%"
+                }, "width": "8%"
             }
         ],
         "language": {

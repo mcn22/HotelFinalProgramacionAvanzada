@@ -38,7 +38,10 @@
                         }
                         @if (User.IsInRole(SD.Roles.Cliente))
                         {
-                            <a class="nav-link" asp-area="" asp-controller="Reserva" asp-action="Index">Mis reservas</a>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Reserva" asp-action="Index">Mis reservas</a>
+                            </li>
 
                         }
                         @if (User.IsInRole(SD.Roles.Administrador))
@@ -69,6 +72,14 @@
                                     </a>
                                 </div>
                             </li>
+                        }
+                        @if (User.IsInRole(SD.Roles.Empleado))
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Reserva" asp-action="Index">Cambio de estados</a>
+                            </li>
+
                         }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Quiénes somos</a>

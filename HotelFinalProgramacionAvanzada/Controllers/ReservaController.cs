@@ -101,7 +101,24 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             }
             return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
         }
-    
+
+        [HttpGet]
+        public IActionResult CambiaEstado(int id = 0)
+        {
+            CambioEstadoReservaViewModel modelo =
+                new CambioEstadoReservaViewModel
+                {
+                    TiposEstadoDD = _unidadTrabajo.EstadosReserva.Listar().ToList().ConvertAll(s => new SelectListItem(s.NombreEstado, s.EstadoReservaId.ToString()))
+                };
+                var reserva = _unidadTrabajo.Reservas.Buscar(id);
+                if (reserva == null)
+                {
+                    return NotFound();
+                }
+                modelo.Reserva = reserva;
+                return View(modelo);         
+        }
+
         [HttpGet]
         public IActionResult Listar()
         {
@@ -111,7 +128,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
                     Where(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))});
             }
             else { 
-                return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Usuario,Habitacion.Hotel") });
+                return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Usuario,Habitacion,EstadoReserva") });
             }
         }
 
@@ -184,36 +201,6 @@ namespace HotelFinalProgramacionAvanzada.Controllers
         }
     }
 }
-
-
-//[HttpGet]
-//public IActionResult Upsert(int id = 0)
-//{
-//    ReservaViewModel modelo =
-//        new ReservaViewModel
-//        {
-//            Habitaciones = _unidadTrabajo.Habitaciones.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre, s.HabitacionId.ToString())),
-//            EstadosReserva = _unidadTrabajo.EstadosReserva.Listar().ToList().ConvertAll(s => new SelectListItem(s.NombreEstado, s.EstadoReservaId.ToString())),
-//            Usuarios = _unidadTrabajo.Usuarios.Listar().ToList().ConvertAll(s => new SelectListItem(s.Nombre + " " + s.Apellido, s.Id.ToString()))
-//        };
-
-//    if (id == 0)
-//    {
-//        modelo.Reserva = new Reserva();
-//        return View(modelo);
-//    }
-//    else
-//    {
-//        var h = _unidadTrabajo.Reservas.Buscar(id);
-//        if (h == null)
-//        {
-//            return NotFound();
-//        }
-
-//        modelo.Reserva = h;
-//        return View(modelo);
-//    }
-//}
 
 //[HttpPost]
 //[ValidateAntiForgeryToken]

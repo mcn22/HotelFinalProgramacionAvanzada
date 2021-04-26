@@ -8,6 +8,7 @@ namespace HotelFinalProgramacionAvanzada.Models
     public class Reserva
     {
         [Key]
+        [DisplayName("Id")]
         public int ReservaId { get; set; }
         //////////////////////////////////////////////
 
@@ -36,7 +37,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         //////////////////////////////////////////////
 
         [Required]
-        [DisplayName("Total a pagar")]
+        [DisplayName("Costo total")]
         [Range(0, 1000000)]
         public decimal CostoTotal { get; set; }
         //////////////////////////////////////////////

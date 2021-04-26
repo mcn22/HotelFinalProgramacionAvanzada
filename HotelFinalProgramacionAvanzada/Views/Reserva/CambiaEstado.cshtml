@@ -1,0 +1,72 @@
+﻿@model HotelFinalProgramacionAvanzada.Models.ViewModels.CambioEstadoReservaViewModel
+
+    @{ Layout = null; }
+
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Upsert" asp-route-id="@Model.Reserva.ReservaId" onsubmit="return PostForm(this);">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Reserva.ReservaId" />                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2 float-left">
+                            <div class="form-group">
+                                <label asp-for="Reserva.ReservaId" class="control-label"></label>
+                                <input asp-for="Reserva.ReservaId" class="form-control" disabled />
+                                <span asp-validation-for="Reserva.ReservaId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-10 float-left">
+                            <div class="form-group">
+                                <label asp-for="Reserva.EstadoReservaId" class="control-label"></label>
+                                @Html.DropDownListFor(s => s.Reserva.EstadoReservaId, Model.TiposEstadoDD, "-Seleccione un estado", new { @class = "form-control" })
+                                <span asp-validation-for="Reserva.EstadoReservaId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4 float-left">
+                            <div class="form-group">
+                                <label asp-for="Reserva.CostoTotal" class="control-label"></label>
+                                <input asp-for="Reserva.CostoTotal" class="form-control" disabled />
+                                <span asp-validation-for="Reserva.CostoTotal" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 float-left">
+                            <div class="form-group">
+                                <label asp-for="Reserva.Saldo" class="control-label"></label>
+                                <input asp-for="Reserva.Saldo" class="form-control" disabled />
+                                <span asp-validation-for="Reserva.Saldo" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 float-left">
+                            <div class="form-group">
+                                <label  class="control-label">Por recibir</label>
+                                @{ 
+                                    var recibir = Model.Reserva.CostoTotal - Model.Reserva.Saldo;
+                                }
+                                <input value="@recibir" class="form-control" disabled />
+                                <span asp-validation-for="Reserva.Saldo" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <hr />
+                        <input type="submit" value="Guardar" class="btn btn-primary btn-block mt-3" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }

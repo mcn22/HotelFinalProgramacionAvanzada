@@ -19,7 +19,7 @@ namespace HotelFinalProgramacionAvanzada.Models
         public TipoHabitacion TipoHabitacion { get; set; }
 
         [Required(ErrorMessage = "Debe especificar un hotel")]
-        [DisplayName("Tipo de habitación")]
+        [DisplayName("Hotel")]
         public int HotelId { get; set; }
 
         [DisplayName("HotelId")]
