@@ -116,48 +116,12 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    ////*****************************************************************************//
-                    ////*****************************************************************************//
-                    ////Creacion de los roles en caso de que no existan para ejecutar la primera vez
-                    //if (!await _roleManager.RoleExistsAsync(SD.Roles.Administrador))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(SD.Roles.Empleado))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Empleado));
-                    //}
-                    //if (!await _roleManager.RoleExistsAsync(SD.Roles.Cliente))
-                    //{
-                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Cliente));
-                    //}
-                    ////fin Creacion de los roles
-                    ////*****************************************************************************//
-                    ////*****************************************************************************//
-                    ////Creacion el primer usuario con rol de administrador para el primer usuario
-                    //var userAdmin =
-                    //new Usuario
-                    //{
-                    //    UserName = "admin@admin.com",
-                    //    Email = "admin@admin.com",
-                    //    Nombre = "admin",
-                    //    PhoneNumber = "12345",
-                    //};
-                    //if (!_userManager.Users.Select(u => u.Email == u.Email).FirstOrDefault())
-                    //{
-                    //    await _userManager.CreateAsync(userAdmin, "Admin-2020");
-                    //    await _userManager.AddToRoleAsync(userAdmin, SD.Roles.Administrador);
-                    //}
 
                     await Setup.InitAsync(_userManager, _roleManager);
                     creaEstadosreservaBase();
                     creaTiposHabitacionreservaBase();
                     creaHotelesBase();
 
-                    //Fin Creacion el primer usuario con rol de administrador
-                    //*****************************************************************************//
-                    //*****************************************************************************//
-                    // Codigo para ejecutar despues de que se tiene un usuario y rol admin en los pasos anteriores
                     if (string.IsNullOrEmpty(Input.Role))
                     {
                         await _userManager.AddToRoleAsync(user, SD.Roles.Cliente);

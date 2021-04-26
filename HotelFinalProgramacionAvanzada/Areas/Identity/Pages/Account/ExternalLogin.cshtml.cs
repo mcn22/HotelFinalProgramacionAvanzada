@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
 using HotelFinalProgramacionAvanzada.Models;
 using HotelFinalProgramacionAvanzada.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -26,19 +27,22 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
         public ExternalLoginModel(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ILogger<ExternalLoginModel> logger,
             RoleManager<IdentityRole> roleManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUnidadTrabajo unidadTrabajo)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _roleManager = roleManager;
             _emailSender = emailSender;
+            _unidadTrabajo = unidadTrabajo;
         }
 
         [BindProperty]
@@ -131,35 +135,10 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
 
-                if (!await _roleManager.RoleExistsAsync(SD.Roles.Administrador))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Administrador));
-                }
-                if (!await _roleManager.RoleExistsAsync(SD.Roles.Empleado))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Empleado));
-                }
-                if (!await _roleManager.RoleExistsAsync(SD.Roles.Cliente))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole(SD.Roles.Cliente));
-                }
-                //fin Creacion de los roles
-                //*****************************************************************************//
-                //*****************************************************************************//
-                //Creacion el primer usuario con rol de administrador para el primer usuario
-                var userAdmin =
-                new Usuario
-                {
-                    UserName = "admin@admin.com",
-                    Email = "admin@admin.com",
-                    Nombre = "admin",
-                    PhoneNumber = "12345",
-                };
-                if (!_userManager.Users.Select(u => u.Email == u.Email).FirstOrDefault())
-                {
-                    await _userManager.CreateAsync(userAdmin, "Admin-2020");
-                    await _userManager.AddToRoleAsync(userAdmin, SD.Roles.Administrador);
-                }
+                await Setup.InitAsync(_userManager, _roleManager);
+                creaEstadosreservaBase();
+                creaTiposHabitacionreservaBase();
+                creaHotelesBase();
 
 
                 var user =
@@ -213,6 +192,27 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             ProviderDisplayName = info.ProviderDisplayName;
             ReturnUrl = returnUrl;
             return Page();
+        }
+
+        public void creaEstadosreservaBase()
+        {
+            _unidadTrabajo.EstadosReserva.Agregar(new EstadoReserva { NombreEstado = SD.EstadosReserva.Adelanto });
+            _unidadTrabajo.EstadosReserva.Agregar(new EstadoReserva { NombreEstado = SD.EstadosReserva.Total });
+            _unidadTrabajo.EstadosReserva.Agregar(new EstadoReserva { NombreEstado = SD.EstadosReserva.Suspendida });
+        }
+
+        public void creaTiposHabitacionreservaBase()
+        {
+            _unidadTrabajo.TiposHabitacion.Agregar(new TipoHabitacion { Nombre = SD.TiposHabitacion.Individual, Descripcion = SD.TiposHabitacion.IndividualDesc, CostoNoche = 40000, ImagenTipo = SD.TiposHabitacion.IndividualImg });
+            _unidadTrabajo.TiposHabitacion.Agregar(new TipoHabitacion { Nombre = SD.TiposHabitacion.Doble, Descripcion = SD.TiposHabitacion.DobleDesc, CostoNoche = 70000, ImagenTipo = SD.TiposHabitacion.DobleImg });
+            _unidadTrabajo.TiposHabitacion.Agregar(new TipoHabitacion { Nombre = SD.TiposHabitacion.DobleSuperior, Descripcion = SD.TiposHabitacion.DobleSuperiorDesc, CostoNoche = 80000, ImagenTipo = SD.TiposHabitacion.DobleSuperiorImg });
+        }
+
+        public void creaHotelesBase()
+        {
+            _unidadTrabajo.Hoteles.Agregar(new Hotel { Nombre = SD.Hoteles.Hotel1, Descripcion = SD.Hoteles.Hotel1Desc, UrlImagen = SD.Hoteles.Hotel1Img, Direccion = SD.Hoteles.Hotel1Direc, Ciudad = SD.Hoteles.Hotel1Ciu, Telefono = SD.Hoteles.Hotel1Tel });
+            _unidadTrabajo.Hoteles.Agregar(new Hotel { Nombre = SD.Hoteles.Hotel2, Descripcion = SD.Hoteles.Hotel2Desc, UrlImagen = SD.Hoteles.Hotel2Img, Direccion = SD.Hoteles.Hotel2Direc, Ciudad = SD.Hoteles.Hotel2Ciu, Telefono = SD.Hoteles.Hotel2Tel });
+            _unidadTrabajo.Hoteles.Agregar(new Hotel { Nombre = SD.Hoteles.Hotel3, Descripcion = SD.Hoteles.Hotel3Desc, UrlImagen = SD.Hoteles.Hotel3Img, Direccion = SD.Hoteles.Hotel3Direc, Ciudad = SD.Hoteles.Hotel3Ciu, Telefono = SD.Hoteles.Hotel3Tel });
         }
     }
 }
