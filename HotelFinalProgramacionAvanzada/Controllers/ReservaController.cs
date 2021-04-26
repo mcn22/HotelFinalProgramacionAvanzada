@@ -1,6 +1,7 @@
 ﻿using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
 using HotelFinalProgramacionAvanzada.Models;
 using HotelFinalProgramacionAvanzada.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -46,8 +47,9 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             modelo.Reserva.FechaLlegada = DateTime.Now;
             modelo.Reserva.FechaSalida = DateTime.Now.AddDays(1);
             return View(modelo);
-        }                
+        }
 
+        [Authorize(Roles = Utility.SD.Roles.Cliente)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult PreReserva(ReservaViewModel modelo)
@@ -105,7 +107,6 @@ namespace HotelFinalProgramacionAvanzada.Controllers
         {
             if (User.IsInRole(Utility.SD.Roles.Cliente))
             {
-                var data = _unidadTrabajo.Reservas.Listar(propiedades: "Habitacion.TipoHabitacion,Habitacion,Habitacion.Hotel");
                 return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Habitacion.TipoHabitacion,Habitacion,Habitacion.Hotel").
                     Where(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))});
             }
@@ -113,9 +114,6 @@ namespace HotelFinalProgramacionAvanzada.Controllers
                 return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Usuario,Habitacion.Hotel") });
             }
         }
-
-
-        //Where(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))
 
         [HttpDelete]
         public IActionResult Borrar(int id)

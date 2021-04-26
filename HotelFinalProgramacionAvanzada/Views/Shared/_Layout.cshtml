@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HotelFinalProgramacionAvanzada</title>
+    <title>@ViewData["Title"] - Natural Connection</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hotel.com</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Natural Connection</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,21 +30,15 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@localizer["Home"]</a>
                         </li>
+                        @if (!User.IsInRole(SD.Roles.Administrador) || !User.IsInRole(SD.Roles.Empleado))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Reserva" asp-action="InicioReserva">@localizer["Reserve"]</a>
+                            </li>
+                        }
                         @if (User.IsInRole(SD.Roles.Cliente))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @localizer["Services"]
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reserva" asp-action="InicioReserva">
-                                        <i class="fas fa-procedures"></i> @localizer["Reserve"]
-                                    </a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reserva" asp-action="Index">
-                                        <i class="fas fa-procedures"></i> Lista de reservas
-                                    </a>
-                                </div>
-                            </li>
+                            <a class="nav-link" asp-area="" asp-controller="Reserva" asp-action="Index">Mis reservas</a>
 
                         }
                         @if (User.IsInRole(SD.Roles.Administrador))
@@ -56,9 +50,11 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Hotel" asp-action="Index">
-                                        <i class="fas fa-hotel"></i> @localizer["Hotels"]</a>
+                                        <i class="fas fa-hotel"></i> @localizer["Hotels"]
+                                    </a>
                                     <a class="nav-link text-dark" asp-area="" asp-controller="TipoHabitacion" asp-action="Index">
-                                        <i class="fas fa-dolly-flatbed"></i> @localizer["Room types"]</a>
+                                        <i class="fas fa-dolly-flatbed"></i> @localizer["Room types"]
+                                    </a>
                                     <a class="nav-link text-dark" asp-area="" asp-controller="EstadoReserva" asp-action="Index">
                                         <i class="fas fa-plus-square"></i> @localizer["Reserve states"]
                                     </a>
@@ -74,6 +70,12 @@
                                 </div>
                             </li>
                         }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Quiénes somos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Contacto</a>
+                        </li>
                     </ul>
                 </div>
                 <partial name="_LoginPartial" />
@@ -83,7 +85,7 @@
                     @await Html.PartialAsync("_CulturePartial")
                 </li>
             </ul>
-                
+
         </nav>
     </header>
     <div class="container">
@@ -114,7 +116,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - BancoMvc
+            &copy; 2021 - Cadena Natural Connection
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

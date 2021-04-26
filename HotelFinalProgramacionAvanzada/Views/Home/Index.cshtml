@@ -7,6 +7,23 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-        <h1 class="display-4">@localizer["Welcome"]</h1>
-</div>
+<section class="banner-area relative mt-4">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row fullscreen align-items-center justify-content-between">
+            <div class="col-lg-8 col-md-6 banner-left banner paddingTextoBanner">
+                <h1 class="display-5 text-white">@localizer["Welcome"]!</h1>
+                <h1 class="text-white">Comodidad a tu alcance</h1>
+                <p class="text-white">
+                    La comodidad y la calidad no tiene por qué ser algo para unos pocos. </br>
+                    La conexión con la naturaleza que buscas
+                    está en un sólo lugar.
+                </p>
+                <button class="btn btn-primary btn-lg">
+                    <a class="nav-link" style="color:aliceblue" asp-area="" asp-controller="Reserva" asp-action="InicioReserva">@localizer["Reserve"]</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
