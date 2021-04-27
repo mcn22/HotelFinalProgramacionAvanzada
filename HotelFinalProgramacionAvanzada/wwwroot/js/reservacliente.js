@@ -14,35 +14,31 @@ function loadDataTable() {
             { "data": "habitacion.nombre", "width": "15%" },
             { "data": "habitacion.hotel.nombre", "width": "15%" },
             {
-                "data": "fechaLlegada", "width": "10%", "render": function (data) {
+                "data": "fechaLlegada", "width": "8%", "render": function (data) {
                     var date = new Date(data);
                     var month = date.getMonth() + 1;
                     return date.getDate() + "/" + (month.length > 1 ? month : month) + "/" + date.getFullYear();
                 }
             },
             {
-                "data": "fechaSalida", "width": "10%", "render": function (data) {
+                "data": "fechaSalida", "width": "8%", "render": function (data) {
                     var date = new Date(data);
                     var month = date.getMonth() + 1;
                     return date.getDate() + "/" + (month.length > 1 ? month : month) + "/" + date.getFullYear();
                 }
+            },
+            {
+                "data": "reservaId",
+                "render": function (data) {
+                    return `
+                            <div class="text-center">
+                                <a onclick="ShowPopup('/Reserva/Detalle/?id=${data}','Cambiar el estado')" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-info"></i> 
+                                </a>
+                            </div>
+                           `;
+                }, "width": "8%"
             }
-            //,
-            //{
-            //    "data": "reservaId",
-            //    "render": function (data) {
-            //        return `
-            //                <div class="text-center">
-            //                    <a onclick="ShowPopup('/Reserva/Upsert/?id=${data}','Actualizar Reserva')" class="btn btn-success text-white" style="cursor:pointer">
-            //                        <i class="fas fa-edit"></i> 
-            //                    </a>
-            //                    <a onclick=Borrar("/Reserva/Borrar/?id=${data}") class="btn btn-danger text-white" style="cursor:pointer">
-            //                        <i class="fas fa-trash-alt"></i> 
-            //                    </a>
-            //                </div>
-            //               `;
-            //    }, "width": "40%"
-            //}
         ],
         "language": {
             "lengthMenu": "Desplegando _MENU_ registros por página",

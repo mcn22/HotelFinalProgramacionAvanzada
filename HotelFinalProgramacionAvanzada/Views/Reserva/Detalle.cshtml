@@ -1,17 +1,12 @@
-﻿@model HotelFinalProgramacionAvanzada.Models.ViewModels.CambioEstadoReservaViewModel
+﻿@model HotelFinalProgramacionAvanzada.Models.ViewModels.DetalleReservaViewModel
 
-    @{ Layout = null; }
+@{ Layout = null; }
 
 <div class="row">
     <div class="col-md-12">
-        <form asp-action="CambiaEstado" asp-route-id="@Model.Reserva.ReservaId" onsubmit="return PostForm(this);">
+        <form asp-action="" asp-route-id="@Model.Reserva.ReservaId" onsubmit="return PostForm(this);">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Reserva.ReservaId" />
-            <input type="hidden" asp-for="Reserva.HabitacionId" />
-            <input type="hidden" asp-for="Reserva.UserId" />
-            <input type="hidden" asp-for="Reserva.FechaLlegada" />
-            <input type="hidden" asp-for="Reserva.FechaSalida" />
-            <input type="hidden" asp-for="Reserva.CostoTotal" />
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-md-4 float-left">
@@ -21,12 +16,11 @@
                             <span asp-validation-for="Reserva.ReservaId" class="text-danger"></span>
                         </div>
                     </div>
-
                     <div class="col-md-8 float-left">
                         <div class="form-group">
-                            <label asp-for="Reserva.EstadoReservaId" class="control-label"></label>
-                            @Html.DropDownListFor(s => s.Reserva.EstadoReservaId, Model.TiposEstadoDD, "-Seleccione un estado", new { @class = "form-control" })
-                            <span asp-validation-for="Reserva.EstadoReservaId" class="text-danger"></span>
+                            <label class="control-label">Estado</label>
+                            <input asp-for="Estado" class="form-control" disabled />
+                            <span asp-validation-for="Estado" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -58,20 +52,21 @@
                             <span asp-validation-for="Reserva.Saldo" class="text-danger"></span>
                         </div>
                     </div>
-
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-md-12">
                     <hr />
-                    <input type="submit" value="Guardar" class="btn btn-primary btn-block mt-3" />
+                    <a asp-action="Index" class="btn btn-success form-control">Regresar</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-    @section Scripts
+@section Scripts
     {
-        <partial name="_ValidationScriptsPartial" />
-    }
+    <partial name="_ValidationScriptsPartial" />
+}
+

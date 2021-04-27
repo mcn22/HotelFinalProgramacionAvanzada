@@ -102,7 +102,6 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
         }
 
-        [HttpGet]
         public IActionResult CambiaEstado(int id = 0)
         {
             CambioEstadoReservaViewModel modelo =
@@ -119,15 +118,67 @@ namespace HotelFinalProgramacionAvanzada.Controllers
                 return View(modelo);         
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CambiaEstado(int id, CambioEstadoReservaViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    modelo.Reserva.Saldo = 0;
+                    _unidadTrabajo.Reservas.Actualizar(modelo.Reserva);
+                    _unidadTrabajo.Guardar();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (_unidadTrabajo.Reservas.Buscar(modelo.Reserva.ReservaId) == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return Json(new { success = true, message = "La Reserva ha sido actualizada." });
+            }
+
+            return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
+        }
+
+        public IActionResult Detalle(int id = 0)
+        {            
+            var reserva = _unidadTrabajo.Reservas.Buscar(id);
+            DetalleReservaViewModel modelo =
+                new DetalleReservaViewModel
+                {
+                    Estado = _unidadTrabajo.EstadosReserva.Buscar(reserva.EstadoReservaId).NombreEstado
+                };
+
+            if (reserva == null)
+            {
+                return NotFound();
+            }
+            modelo.Reserva = reserva;
+            return View(modelo);
+        }
+
         [HttpGet]
         public IActionResult Listar()
         {
             if (User.IsInRole(Utility.SD.Roles.Cliente))
             {
                 return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Habitacion.TipoHabitacion,Habitacion,Habitacion.Hotel").
-                    Where(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier))});
+                    Where(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)) });
             }
-            else { 
+            else if (User.IsInRole(Utility.SD.Roles.Empleado)){
+                var hotel = _unidadTrabajo.HotelEmpleados.Buscar(u => u.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier));
+                return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Usuario,Habitacion,EstadoReserva").Where(h => h.Habitacion.HotelId == hotel.HotelId).ToList()
+                
+                });
+        }
+            else {
                 return Json(new { success = true, data = _unidadTrabajo.Reservas.Listar(propiedades: "Usuario,Habitacion,EstadoReserva") });
             }
         }
@@ -202,39 +253,4 @@ namespace HotelFinalProgramacionAvanzada.Controllers
     }
 }
 
-//[HttpPost]
-//[ValidateAntiForgeryToken]
-//public IActionResult Upsert(int id, ReservaViewModel modelo)
-//{
-//    if (ModelState.IsValid)
-//    {
-//        if (id == 0)
-//        {
-//            _unidadTrabajo.Reservas.Agregar(modelo.Reserva);
-//            _unidadTrabajo.Guardar();
-//        }
-//        else
-//        {
-//            try
-//            {
-//                _unidadTrabajo.Reservas.Actualizar(modelo.Reserva);
-//                _unidadTrabajo.Guardar();
-//            }
-//            catch (DbUpdateConcurrencyException)
-//            {
-//                if (_unidadTrabajo.Reservas.Buscar(modelo.Reserva.ReservaId) == null)
-//                {
-//                    return NotFound();
-//                }
-//                else
-//                {
-//                    throw;
-//                }
-//            }
-//        }
 
-//        return Json(new { success = true, message = "La Reserva ha sido guardada." });
-//    }
-
-//    return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
-//}
