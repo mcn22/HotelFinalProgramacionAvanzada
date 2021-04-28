@@ -3,6 +3,7 @@ using HotelFinalProgramacionAvanzada.DataAccess.Repositorio;
 using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
 using HotelFinalProgramacionAvanzada.Models;
 using HotelFinalProgramacionAvanzada.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +23,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
 
         readonly ApplicationDbContext _db;
 
+        [Authorize(Roles = SD.Roles.Administrador)]
         public IActionResult Index()
         {
             return View();
@@ -52,6 +54,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
         //    return Json(new { success = true, message = "El usuario se ha bloqueado/desbloqueado." });
         //}
 
+        [Authorize(Roles = SD.Roles.Administrador)]
         [HttpGet]
         public IActionResult Listar()
         {

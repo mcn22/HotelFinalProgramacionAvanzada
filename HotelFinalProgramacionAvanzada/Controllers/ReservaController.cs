@@ -68,7 +68,8 @@ namespace HotelFinalProgramacionAvanzada.Controllers
                 else
                 {
                     //return RedirectToAction("PreReserva", new { id = modelo.Hotel.HotelId });
-                    return Json(new { success = false, message = "No hay disponibilidad." });
+                    TempData["notificacion"] = "Error";
+                    return RedirectToAction("PreReserva", new { id = modelo.Hotel.HotelId});
                 }
             }
             else
@@ -77,6 +78,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             }
         }
 
+        [Authorize(Roles = Utility.SD.Roles.Cliente)]
         public IActionResult ConfirmarReserva(Reserva modelo)
         {
             ReservaDemoViewModel modeloDemo = new ReservaDemoViewModel();
@@ -86,6 +88,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             return View(modeloDemo);
         }
 
+        [Authorize(Roles = Utility.SD.Roles.Cliente)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ConfirmarReserva(ReservaDemoViewModel modelo)
@@ -102,6 +105,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             return Json(new { success = false, message = "Ocurrió un error guardando la Reserva." });
         }
 
+        [Authorize(Roles = ""+Utility.SD.Roles.Administrador+","+Utility.SD.Roles.Empleado + "")]
         public IActionResult CambiaEstado(int id = 0)
         {
             CambioEstadoReservaViewModel modelo =
@@ -118,6 +122,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
                 return View(modelo);         
         }
 
+        [Authorize(Roles = "" + Utility.SD.Roles.Administrador + "," + Utility.SD.Roles.Empleado + "")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CambiaEstado(int id, CambioEstadoReservaViewModel modelo)
@@ -126,7 +131,12 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             {
                 try
                 {
-                    modelo.Reserva.Saldo = 0;
+                    var idSuspendida = _unidadTrabajo.EstadosReserva.Listar().Where(e => e.NombreEstado == Utility.SD.EstadosReserva.Suspendida)
+                            .FirstOrDefault().EstadoReservaId;
+                    if (modelo.Reserva.EstadoReservaId != idSuspendida)
+                    {
+                        modelo.Reserva.Saldo = 0;
+                    }                  
                     _unidadTrabajo.Reservas.Actualizar(modelo.Reserva);
                     _unidadTrabajo.Guardar();
                 }

@@ -10,6 +10,7 @@ function loadDataTable() {
             "url": "/Reserva/Listar"
         },
         "columns": [
+            { "data": "reservaId", "width": "5%" },
             { "data": "estadoReserva.nombreEstado", "width": "5%" },
             { "data": "habitacion.nombre", "width": "5%" },
             { "data": "usuario.email", "width": "15%" },
@@ -27,7 +28,6 @@ function loadDataTable() {
                     return date.getDate() + "/" + (month.length > 1 ? month : month) + "/" + date.getFullYear();
                 }
             },
-            { "data": "costoTotal", "width": "5%" },
             { "data": "saldo", "width": "5%" },
             {
                 "data": "reservaId",

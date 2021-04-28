@@ -16,8 +16,9 @@
             @{
                 if (User.IsInRole(SD.Roles.Cliente))
                 {
+                    <th>Id</th>
                     <th>Tipo de habitacion</th>
-                    <th>Nombre</th>
+                    <th>Habitación</th>
                     <th>Hotel</th>
                     <th>Llegada</th>
                     <th>Salida</th>
@@ -27,12 +28,12 @@
                 }
                 else
                 {
+                    <th>Id</th>
                     <th>Estado</th>
                     <th>Habitación</th>
                     <th>Cliente</th>
                     <th>Llegada</th>
                     <th>Salida</th>
-                    <th>Costo total</th>
                     <th>Saldo</th>
                     <th>
                         Estado

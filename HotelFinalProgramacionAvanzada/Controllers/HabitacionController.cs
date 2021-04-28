@@ -1,6 +1,7 @@
 ﻿using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
 using HotelFinalProgramacionAvanzada.Models;
 using HotelFinalProgramacionAvanzada.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,13 @@ namespace HotelFinalProgramacionAvanzada.Controllers
 
         readonly IUnidadTrabajo _unidadTrabajo;
 
+        [Authorize(Roles = Utility.SD.Roles.Administrador)]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = Utility.SD.Roles.Administrador)]
         [HttpGet]
         public IActionResult Upsert(int id = 0)
         {
@@ -50,6 +53,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             }
         }
 
+        [Authorize(Roles = Utility.SD.Roles.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(int id, HabitacionViewModel modelo)
@@ -93,6 +97,7 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             return Json(new { success = true, data = _unidadTrabajo.Habitaciones.Listar(propiedades: "TipoHabitacion,Hotel")});
         }
 
+        [Authorize(Roles = Utility.SD.Roles.Administrador)]
         [HttpDelete]
         public IActionResult Borrar(int id)
         {
