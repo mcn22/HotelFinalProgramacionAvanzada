@@ -1,5 +1,6 @@
 ﻿using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
 using HotelFinalProgramacionAvanzada.Models;
+using HotelFinalProgramacionAvanzada.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,15 +26,14 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             return View();
         }
 
-        [Authorize(Roles = Utility.SD.Roles.Administrador)]
-        [HttpGet]
-        public IActionResult Upsert(int id = 0)
+        [Authorize(Roles = SD.Roles.Administrador)]
+        public IActionResult Upsert(int? id)
         {
-            if (id == 0)
+            if (id == null)
                 return View(new EstadoReserva());
             else
             {
-                var t = _unidadTrabajo.EstadosReserva.Buscar(id);
+                var t = _unidadTrabajo.ProcedimientoAlmacenado.Buscar<EstadoReserva>(new Dictionary<string, object> { { "@EstadoReservaId", id } });
                 if (t == null)
                 {
                     return NotFound();
@@ -42,61 +42,57 @@ namespace HotelFinalProgramacionAvanzada.Controllers
             }
         }
 
-        [Authorize(Roles = Utility.SD.Roles.Administrador)]
+        [Authorize(Roles = SD.Roles.Administrador)]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(int id, EstadoReserva EstadoReserva)
+        public IActionResult Upsert(EstadoReserva estadoReserva)
         {
             if (ModelState.IsValid)
             {
-                if (id == 0)
+                var parametros = new Dictionary<string, object>();
+                parametros.Add("@NombreEstado", estadoReserva.NombreEstado);
+
+                if (estadoReserva.EstadoReservaId != 0)
                 {
-                    _unidadTrabajo.EstadosReserva.Agregar(EstadoReserva);
-                    _unidadTrabajo.Guardar();
+                    parametros.Add("@EstadoReservaId", estadoReserva.EstadoReservaId);
+                    _unidadTrabajo.ProcedimientoAlmacenado.Ejecutar(SD.Proc_EstadoReserva_Actualizar, parametros);
                 }
                 else
                 {
-                    try
-                    {
-                        _unidadTrabajo.EstadosReserva.Actualizar(EstadoReserva);
-                        _unidadTrabajo.Guardar();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (_unidadTrabajo.EstadosReserva.Buscar(EstadoReserva.EstadoReservaId) == null)
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
+                    _unidadTrabajo.ProcedimientoAlmacenado.Ejecutar(SD.Proc_EstadoReserva_Crear, parametros);
                 }
+                _unidadTrabajo.Guardar();
                 return Json(new { success = true, message = "El estado de la reserva  ha sido guardado." });
             }
             return Json(new { success = false, message = "Ocurrió un error guardando el estado de la reserva ." });
         }
 
-        [HttpGet]
-        public IActionResult Listar()
-        {
-            return Json(new { success = true, data = _unidadTrabajo.EstadosReserva.Listar() });
-        }
+        #region Api Methods
 
-        [Authorize(Roles = Utility.SD.Roles.Administrador)]
+        [Authorize(Roles = SD.Roles.Administrador)]
         [HttpDelete]
         public IActionResult Borrar(int id)
         {
-            var t = _unidadTrabajo.EstadosReserva.Buscar(id);
-            if (t == null)
+            var estadoReserva = _unidadTrabajo.ProcedimientoAlmacenado.Buscar<EstadoReserva>(new Dictionary<string, object> { { "@EstadoReservaId", id } });
+
+            if (estadoReserva == null)
             {
-                return Json(new { success = false, message = "Estado de la reserva no borrado." });
+                return Json(new { success = false, message = "Se ha producido un error mientras se borraba el estado de la reserva." });
             }
-            _unidadTrabajo.EstadosReserva.Remover(t);
+
+            _unidadTrabajo.ProcedimientoAlmacenado.Ejecutar(SD.Proc_EstadoReserva_Borrar, new Dictionary<string, object> { { "@EstadoReservaId", id } });
             _unidadTrabajo.Guardar();
-            return Json(new { success = true, message = "El estado de la reserva ha sido borrado." });
+
+            return Json(new { success = true, message = "El estado de la reserva se ha borrado permanentemente." });
         }
+
+        [HttpGet]
+        public IActionResult Listar()
+        {
+            return Json(new { data = _unidadTrabajo.ProcedimientoAlmacenado.Listar<EstadoReserva>() });
+        }
+
+        #endregion
     }
 }
 

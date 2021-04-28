@@ -3,6 +3,12 @@ namespace HotelFinalProgramacionAvanzada.Utility
 {
     public static class SD
     {
+        public const string Proc_EstadoReserva_Listar = "usp_ListarEstadoReserva";
+        public const string Proc_EstadoReserva_Buscar = "usp_BuscarEstadoReserva";
+        public const string Proc_EstadoReserva_Crear = "usp_CrearEstadoReserva";
+        public const string Proc_EstadoReserva_Actualizar = "usp_ActualizarEstadoReserva";
+        public const string Proc_EstadoReserva_Borrar = "usp_BorrarEstadoReserva";
+
         public static class Roles
         {
             public const string Administrador = "Administrador";

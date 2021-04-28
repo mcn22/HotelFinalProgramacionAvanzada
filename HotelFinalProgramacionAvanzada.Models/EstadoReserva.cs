@@ -6,6 +6,12 @@ namespace HotelFinalProgramacionAvanzada.Models
 {
     public class EstadoReserva
     {
+        const string Listar = "usp_ListarEstadoReserva";
+        const string Buscar = "usp_BuscarEstadoReserva";
+        const string Crear = "usp_CrearEstadoReserva";
+        const string Actualizar = "usp_ActualizarEstadoReserva";
+        const string Borrar = "usp_BorrarEstadoReserva";
+
         [Key]
         public int EstadoReservaId { get; set; }
 

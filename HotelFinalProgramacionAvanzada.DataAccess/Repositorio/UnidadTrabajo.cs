@@ -11,7 +11,7 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Repositorio
         public UnidadTrabajo(ApplicationDbContext db)
         {
             _db = db;
-
+            ProcedimientoAlmacenado = new ProcedimientoAlmacenado(_db);
             EstadosReserva = new EstadoReservaRepositorio(db);
             Habitaciones = new HabitacionRepositorio(db);
             Hoteles = new HotelRepositorio(db);
@@ -30,6 +30,7 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Repositorio
         public IReservaRepositorio Reservas { get; private set; }
         public ITipoHabitacionRepositorio TiposHabitacion { get; private set; }
         public IUsuarioRepositorio Usuarios { get; private set; }
+        public IProcedimientoAlmacenado ProcedimientoAlmacenado { get; private set; }
 
         public void Dispose()
         {

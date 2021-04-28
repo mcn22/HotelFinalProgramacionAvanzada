@@ -14,6 +14,7 @@ namespace HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio
         IReservaRepositorio Reservas { get;}
         ITipoHabitacionRepositorio TiposHabitacion { get;}
         IUsuarioRepositorio Usuarios { get;}
+        IProcedimientoAlmacenado ProcedimientoAlmacenado { get; }
 
         void Guardar();
     }
