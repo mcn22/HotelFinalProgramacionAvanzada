@@ -62,12 +62,13 @@ namespace HotelFinalProgramacionAvanzada
                 }
               );
 
-            services.AddAuthentication().AddFacebook(options =>
-            {
-                options.AppId = "496519634709007";
-                options.AppSecret = "fcc2dc274927e17dde496aa9b0f41c6f";
-            }
-                         );
+            services.AddAuthentication().AddFacebook(
+                options =>
+                {
+                    options.AppId = "284607693402393";
+                    options.AppSecret = "905653bfc456bbe8f22c3fccd38ba7ca";
+                }
+           );
 
 
             services.AddAuthentication().AddGoogle(options =>

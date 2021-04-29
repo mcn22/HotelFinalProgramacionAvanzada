@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -10,6 +11,7 @@ using HotelFinalProgramacionAvanzada.DataAccess.Repositorio.IRepositorio;
 using HotelFinalProgramacionAvanzada.Models;
 using HotelFinalProgramacionAvanzada.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +30,7 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
         private readonly ILogger<ExternalLoginModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUnidadTrabajo _unidadTrabajo;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         public ExternalLoginModel(
             SignInManager<IdentityUser> signInManager,
@@ -35,7 +38,8 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             ILogger<ExternalLoginModel> logger,
             RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
-            IUnidadTrabajo unidadTrabajo)
+            IUnidadTrabajo unidadTrabajo,
+             IWebHostEnvironment hostEnvironment)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -43,6 +47,7 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             _roleManager = roleManager;
             _emailSender = emailSender;
             _unidadTrabajo = unidadTrabajo;
+            _hostEnvironment = hostEnvironment;
         }
 
         [BindProperty]
@@ -188,8 +193,26 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                             values: new { area = "Identity", userId = userId, code = code },
                             protocol: Request.Scheme);
 
-                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        string plantilla =
+                   string.Join(Path.DirectorySeparatorChar.ToString(), _hostEnvironment.WebRootPath, "plantillas",
+                   "correos",
+                   "Register.html");
+                        string htmlMessage = string.Empty;
+                        using (StreamReader reader = System.IO.File.OpenText(plantilla))
+                        {
+                            htmlMessage = reader.ReadToEnd();
+                        }
+                        htmlMessage =
+                        string.Format(
+                        htmlMessage,
+                        "Bienvenido.",
+                        DateTime.Now.ToString("dddd, d MMMM yyyy"),
+                        ((Usuario)user).Nombre,
+                        user.Email,
+                        HtmlEncoder.Default.Encode(callbackUrl)
+                        );
+                        await _emailSender.SendEmailAsync(user.Email, "Confirmación de Correo Electrónico", htmlMessage);
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)

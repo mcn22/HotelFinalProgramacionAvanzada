@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -10,6 +11,7 @@ using HotelFinalProgramacionAvanzada.Models;
 using HotelFinalProgramacionAvanzada.Utility;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,7 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUnidadTrabajo _unidadTrabajo;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -36,7 +39,8 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             RoleManager<IdentityRole> roleManager,
-            IUnidadTrabajo unidadTrabajo)
+            IUnidadTrabajo unidadTrabajo,
+            IWebHostEnvironment hostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -44,6 +48,7 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _roleManager = roleManager;
             _unidadTrabajo = unidadTrabajo;
+            _hostEnvironment = hostEnvironment;
         }
 
         [BindProperty]
@@ -194,8 +199,26 @@ namespace HotelFinalProgramacionAvanzada.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     //Evitar el envio del correo por ahora
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    string plantilla =
+                     string.Join(Path.DirectorySeparatorChar.ToString(), _hostEnvironment.WebRootPath, "plantillas",
+                     "correos",
+                     "Register.html");
+                    string htmlMessage = string.Empty;
+                    using (StreamReader reader = System.IO.File.OpenText(plantilla))
+                    {
+                        htmlMessage = reader.ReadToEnd();
+                    }
+                    htmlMessage =
+                    string.Format(
+                    htmlMessage,
+                    "Bienvenido.",
+                    DateTime.Now.ToString("dddd, d MMMM yyyy"),
+                    ((Usuario)user).Nombre,
+                    user.Email,
+                    HtmlEncoder.Default.Encode(callbackUrl)
+                    );
+                    await _emailSender.SendEmailAsync(user.Email, "Confirmación de Correo Electrónico", htmlMessage);
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

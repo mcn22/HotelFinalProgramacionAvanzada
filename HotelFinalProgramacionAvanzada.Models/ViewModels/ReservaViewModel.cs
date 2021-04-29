@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace HotelFinalProgramacionAvanzada.Models.ViewModels
 {
@@ -22,6 +23,7 @@ namespace HotelFinalProgramacionAvanzada.Models.ViewModels
         public int DiasHospedaje { get; set;}
 
         [DisplayName("Tipo de habitacion")]
+        [Required(ErrorMessage = "Este campo es requerido.")]
         public int TipoHabitacionId { get; set; }
         public List<TipoHabitacion> TiposHabitacionList { get; set; } 
         public Hotel Hotel { get; set; }

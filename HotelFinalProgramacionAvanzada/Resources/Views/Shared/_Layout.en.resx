@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About us" xml:space="preserve">
+    <value>About us</value>
+  </data>
   <data name="Bedrooms" xml:space="preserve">
     <value>Bedrooms</value>
+  </data>
+  <data name="Change of states" xml:space="preserve">
+    <value>Change of states</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
   </data>
   <data name="Employees" xml:space="preserve">
     <value>Employees</value>
@@ -131,6 +140,9 @@
   </data>
   <data name="Maintenance" xml:space="preserve">
     <value>Maintenance</value>
+  </data>
+  <data name="My reservations" xml:space="preserve">
+    <value>My reservations</value>
   </data>
   <data name="Reservation" xml:space="preserve">
     <value>Reservation</value>
