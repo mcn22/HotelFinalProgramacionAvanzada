@@ -252,6 +252,10 @@ namespace HotelFinalProgramacionAvanzada.Controllers
 
                         }
                     }
+                    if (resultado != 0)
+                    {
+                        break;
+                    }
                 }
             }
             catch (Exception)
