@@ -36,6 +36,10 @@ namespace HotelFinalProgramacionAvanzada.Controllers
 
         public IActionResult PreReserva(int id = 0)
         {
+            if (id == 0)
+            {
+                return RedirectToAction("InicioReserva");
+            }
             ReservaViewModel modelo =
                 new ReservaViewModel
                 {
